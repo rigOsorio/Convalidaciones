@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,15 +28,18 @@ public class Comparacion extends javax.swing.JFrame {
     String name;
     String idAsignatura;
     String nombreAsignatura;
-    public Comparacion(String nameAsignatura,String nameAsignaturaOtro,String name) {
+    public Comparacion(String idAsignatura,String nameAsignaturaOtro,String name) {
         initComponents();
         this.name=name;
-        this.idAsignatura=nameAsignatura;
+        this.idAsignatura=idAsignatura;
         this.nombreAsignatura=nameAsignaturaOtro;
         jLabel4.setText(name);
         jLabel6.setText(name);
         mostrar();
         this.setTitle(nombreAsignatura);
+        jTextArea3.setEditable(false);
+        jTextArea2.setEditable(false);
+        jTextArea1.setEditable(false);
     }
     
     public void mostrar(){
@@ -81,11 +85,17 @@ public class Comparacion extends javax.swing.JFrame {
     public void mostrarContenido(){
         String xp="select nombre_contenido from tb_contenido where id_asignatura=(select id_asignatura from tb_asignaturas where id_asignatura='"+idAsignatura+"'LIMIT 1)";
         ResultSet rs3=Conectar.getTabla(xp);
+        String x="select contenido from tb_contenido_otros where id_asignaturas=(select id from tb_asignaturas where nombre_asignatura='"+nombreAsignatura+"'  and id_asignatura='"+idAsignatura+"')";
+        ResultSet rs=Conectar.getTabla(x);
         System.err.println(xp);
+        System.err.println(x);
         DefaultListModel listModel2 = new DefaultListModel();
         try {
             while(rs3.next()){
                 listModel2.addElement(rs3.getString("nombre_contenido"));
+            }
+            while(rs.next()){
+                jTextArea3.setText(rs.getString("contenido"));
             }
         } catch (SQLException ex) {
             System.out.print(ex);
@@ -143,12 +153,12 @@ public class Comparacion extends javax.swing.JFrame {
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -171,10 +181,6 @@ public class Comparacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
-
         jLabel5.setText("UNEATLANTICO");
 
         jLabel6.setText("jLabel6");
@@ -185,6 +191,10 @@ public class Comparacion extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane5.setViewportView(jList1);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane4.setViewportView(jTextArea3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -203,7 +213,7 @@ public class Comparacion extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -212,12 +222,12 @@ public class Comparacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Contenido", jPanel3);
@@ -330,9 +340,9 @@ public class Comparacion extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Convalida por créditos");
+        jCheckBox1.setText("Convalida por outcom");
 
-        jCheckBox2.setText("Convalida por Outcom");
+        jCheckBox2.setText("Convalida por creditos");
 
         jCheckBox3.setText("Convalida por contenido");
 
@@ -384,25 +394,27 @@ public class Comparacion extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
+        Asignaturas a = new Asignaturas(name);
+        a.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             Statement stm = cn.createStatement();
             if (jCheckBox1.isSelected()==true){
-            stm.execute("update tb_asignaturas set por_creditos="+1+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
-                    + "and id_asignatura=('"+idAsignatura+"')"
-                    + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
-            else{
-            stm.execute("update tb_asignaturas set por_creditos="+0+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
-                    + "and id_asignatura=('"+idAsignatura+"')"
-                    + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
-            if (jCheckBox2.isSelected()==true){
             stm.execute("update tb_asignaturas set por_outcom="+1+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
                     + "and id_asignatura=('"+idAsignatura+"')"
                     + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
             else{
             stm.execute("update tb_asignaturas set por_outcom="+0+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
+                    + "and id_asignatura=('"+idAsignatura+"')"
+                    + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
+            if (jCheckBox2.isSelected()==true){
+            stm.execute("update tb_asignaturas set por_creditos="+1+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
+                    + "and id_asignatura=('"+idAsignatura+"')"
+                    + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
+            else{
+            stm.execute("update tb_asignaturas set por_creditos="+0+" where id_universidad=(select id from tb_universidades where nombre_universidad = '"+name+"') "
                     + "and id_asignatura=('"+idAsignatura+"')"
                     + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
             if (jCheckBox3.isSelected()==true){
@@ -414,11 +426,11 @@ public class Comparacion extends javax.swing.JFrame {
                     + "and id_asignatura=('"+idAsignatura+"')"
                     + "and nombre_asignatura=('"+ nombreAsignatura+ "')");}
             mostrar();
-            
+            JOptionPane.showMessageDialog(this, "Se actulizo la comparación");
         } catch (SQLException ex) {
             System.out.print(ex);
-            
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -484,6 +496,6 @@ public class Comparacion extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
 }

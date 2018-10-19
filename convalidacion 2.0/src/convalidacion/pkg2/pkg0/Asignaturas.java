@@ -6,6 +6,9 @@
 package convalidacion.pkg2.pkg0;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Asignaturas extends javax.swing.JDialog {
     private String nombre="";
+    private String idAsignatura="";
+    private String nombreAsignatura="";
+    
     /**
      * Creates new form Asignaturas
      */
@@ -30,7 +36,18 @@ public class Asignaturas extends javax.swing.JDialog {
       modelo.setColumnIdentifiers(new Object[]{"Asignaturas","Créditos","C. outcom","C. creditos","C. contenido","corresponde"});
       try{
           while(rs2.next()){
-              modelo.addRow(new Object[]{rs2.getString("nombre_asignatura"),rs2.getString("creditos"),rs2.getBoolean("por_outcom") == true ? "Si":"No"  ,rs2.getBoolean("por_creditos")== true ? "Si":"No",rs2.getBoolean("por_contenido")== true ? "Si":"No",rs2.getString("id_asignatura")});
+                 String x="no convalida ";
+                 
+              if(rs2.getString("id_asignatura")!=null){
+              ResultSet rs=Conectar.getTabla("select nombre_asignatura from tb_uneatlantico where id="+rs2.getInt("id_asignatura")+"");
+              if(rs.next()){
+                  x=rs.getString("nombre_asignatura");
+              }
+              
+              System.out.println("select nombre_asignatura from tb_uneatlantico where id='"+rs2.getString("id_asignatura")+"'");}
+              modelo.addRow(new Object[]{rs2.getString("nombre_asignatura"),rs2.getString("creditos"),rs2.getBoolean("por_outcom") == true ? "Si":"No"  ,
+                  rs2.getBoolean("por_creditos")== true ? "Si":"No",
+                  rs2.getBoolean("por_contenido")== true ? "Si":"No",x});
           }
           rs2.close();
           Conectar.cerrarConec();
@@ -64,7 +81,7 @@ public class Asignaturas extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Comparar");
+        jButton1.setText("Verificar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -98,11 +115,23 @@ public class Asignaturas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // A id de nuestra asignatura
-        String A=jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString();
-        // AUO Nombre de la asignatura de la otra universidad
-        String AUO=jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
-        new Comparacion(A,AUO,this.nombre).setVisible(true);
+        try {
+            String t="";
+            // AUO Nombre de la asignatura de la otra universidad
+            Object p=String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0));
+            System.out.println(p);
+            nombreAsignatura=p.toString();
+            ResultSet rs=Conectar.getTabla("select u.id id from tb_asignaturas a, tb_uneatlantico u where a.nombre_asignatura = '"+p+"' and a.id_asignatura=u.id");
+            if(rs.next()){
+                t=rs.getString("id");
+                System.err.println(t);
+                idAsignatura=t;
+            }
+            this.dispose();
+            new Comparacion(idAsignatura,nombreAsignatura,this.nombre).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
