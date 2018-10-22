@@ -117,28 +117,38 @@ public class Asignaturas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String comparar=jTable1.getModel().getValueAt(jTable1.getSelectedRow(),5).toString();
-        if(comparar.equals("no convalida")){
-            JOptionPane.showMessageDialog(null,"esta asignatura no tiene similitudes con alguna asignatura nuestra");
-        }
-        else{
-            try {
-                String t="";
-                Object p=String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0));
-                System.out.println(p);
+        
+        if(jTable1.getSelectedRow()>=0)
+        {
+            String comparar=jTable1.getModel().getValueAt(jTable1.getSelectedRow(),5).toString();
+            if(comparar.equals("no convalida")){
+                JOptionPane.showMessageDialog(null,"esta asignatura no tiene similitudes con alguna asignatura nuestra");
+            }
+            else{
+                try {
+                    String t="";
+                    Object p=String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0));
+                    System.out.println(p);
                 
-                nombreAsignatura=p.toString();
-                ResultSet rs=Conectar.getTabla("select u.id id from tb_asignaturas a, tb_uneatlantico u where a.nombre_asignatura = '"+p+"' and a.id_asignatura=u.id");
+                     nombreAsignatura=p.toString();
+                    ResultSet rs=Conectar.getTabla("select u.id id from tb_asignaturas a, tb_uneatlantico u where a.nombre_asignatura = '"+p+"' and a.id_asignatura=u.id");
                 if(rs.next()){
                     t=rs.getString("id");
                     System.err.println(t);
                     idAsignatura=t;
                 }
                 this.dispose();
-                new Comparacion(idAsignatura,nombreAsignatura,this.nombre).setVisible(true);
+                Comparacion b=new Comparacion(idAsignatura,nombreAsignatura,this.nombre);
+                b.setLocationRelativeTo(null);
+                b.setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE, null, ex);
+                
+                System.err.println(ex);
             }
+        }
+        }else{
+        JOptionPane.showMessageDialog(null,"Selecciona alguna opcion");
+        
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

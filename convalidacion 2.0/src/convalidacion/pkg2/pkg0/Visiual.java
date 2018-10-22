@@ -5,7 +5,6 @@
  */
 package convalidacion.pkg2.pkg0;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -132,13 +132,21 @@ public class Visiual extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-       
+       if(jTable1.getSelectedRow()>=0){
        String nombre=jTable1.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn()).toString();
-       new Asignaturas(nombre).setVisible(true);
+       Asignaturas n=new Asignaturas(nombre);
+       n.setVisible(true);
+       n.setLocationRelativeTo(null);
+    }else{
+           JOptionPane.showMessageDialog(null, "selecciona alguna universidad");
+       }
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        new Edicion().setVisible(true);
+
+        Edicion w=new Edicion();
+        w.setVisible(true);
+        w.setLocationRelativeTo(null);
     }//GEN-LAST:event_button1ActionPerformed
 
     /**

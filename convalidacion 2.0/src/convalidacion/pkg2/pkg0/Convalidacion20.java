@@ -18,7 +18,9 @@ public class Convalidacion20 {
         // TODO code application logic here
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Visiual().setVisible(true);
+                Visiual x=new Visiual();
+                x.setVisible(true);
+                x.setLocationRelativeTo(null);
             }
         });
     }
