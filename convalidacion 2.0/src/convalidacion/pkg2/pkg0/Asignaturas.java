@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,23 +36,24 @@ public class Asignaturas extends javax.swing.JDialog {
       ResultSet rs2=Conectar.getTabla("select * from tb_asignaturas where id_universidad=(select id from tb_universidades where nombre_universidad like '%"+nombre+"%')");
       modelo.setColumnIdentifiers(new Object[]{"Asignaturas","Créditos","C. outcom","C. creditos","C. contenido","corresponde"});
       try{
-          while(rs2.next()){
-                 String x="no convalida ";
+            while(rs2.next()){
+                 String x="no convalida";
                  
               if(rs2.getString("id_asignatura")!=null){
-              ResultSet rs=Conectar.getTabla("select nombre_asignatura from tb_uneatlantico where id="+rs2.getInt("id_asignatura")+"");
-              if(rs.next()){
-                  x=rs.getString("nombre_asignatura");
-              }
+                ResultSet rs=Conectar.getTabla("select nombre_asignatura from tb_uneatlantico where id="+rs2.getInt("id_asignatura")+"");
+                if(rs.next()){
+                    x=rs.getString("nombre_asignatura");
+                }
               
-              System.out.println("select nombre_asignatura from tb_uneatlantico where id='"+rs2.getString("id_asignatura")+"'");}
+             // System.out.println("select nombre_asignatura from tb_uneatlantico where id='"+rs2.getString("id_asignatura")+"'");
+              }
               modelo.addRow(new Object[]{rs2.getString("nombre_asignatura"),rs2.getString("creditos"),rs2.getBoolean("por_outcom") == true ? "Si":"No"  ,
                   rs2.getBoolean("por_creditos")== true ? "Si":"No",
                   rs2.getBoolean("por_contenido")== true ? "Si":"No",x});
-          }
-          rs2.close();
-          Conectar.cerrarConec();
-          jTable1.setModel(modelo);
+            }
+            rs2.close();
+            Conectar.cerrarConec();
+            jTable1.setModel(modelo);
       }catch(Exception e){
           System.out.println(e);
       }
@@ -93,13 +95,13 @@ public class Asignaturas extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(261, 261, 261)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,22 +117,28 @@ public class Asignaturas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            String t="";
-            // AUO Nombre de la asignatura de la otra universidad
-            Object p=String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0));
-            System.out.println(p);
-            nombreAsignatura=p.toString();
-            ResultSet rs=Conectar.getTabla("select u.id id from tb_asignaturas a, tb_uneatlantico u where a.nombre_asignatura = '"+p+"' and a.id_asignatura=u.id");
-            if(rs.next()){
-                t=rs.getString("id");
-                System.err.println(t);
-                idAsignatura=t;
+        String comparar=jTable1.getModel().getValueAt(jTable1.getSelectedRow(),5).toString();
+        if(comparar.equals("no convalida")){
+            JOptionPane.showMessageDialog(null,"esta asignatura no tiene similitudes con alguna asignatura nuestra");
+        }
+        else{
+            try {
+                String t="";
+                Object p=String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0));
+                System.out.println(p);
+                
+                nombreAsignatura=p.toString();
+                ResultSet rs=Conectar.getTabla("select u.id id from tb_asignaturas a, tb_uneatlantico u where a.nombre_asignatura = '"+p+"' and a.id_asignatura=u.id");
+                if(rs.next()){
+                    t=rs.getString("id");
+                    System.err.println(t);
+                    idAsignatura=t;
+                }
+                this.dispose();
+                new Comparacion(idAsignatura,nombreAsignatura,this.nombre).setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.dispose();
-            new Comparacion(idAsignatura,nombreAsignatura,this.nombre).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
