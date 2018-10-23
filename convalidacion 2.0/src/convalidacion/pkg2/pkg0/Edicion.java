@@ -365,8 +365,7 @@ public class Edicion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
-        // TODO add your handling code here:
+    public void mostraLista(){
         ResultSet rs4=Conectar.getTabla("select nombre_contenido from tb_contenido where id_asignatura=(select id from tb_uneatlantico where nombre_asignatura='"+jList3.getSelectedValue()+"')");
         DefaultListModel listModel2 = new DefaultListModel();
         try {
@@ -377,8 +376,13 @@ public class Edicion extends javax.swing.JFrame {
             System.out.print(ex);
         }
         jList4.setModel(listModel2);
+    }
+    private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
+        // TODO add your handling code here:
+        mostraLista();
     }//GEN-LAST:event_jList3ValueChanged
 boolean a;
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          if (jPanel4.isVisible()){
              a=false;
@@ -394,28 +398,33 @@ boolean a;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         switch(jButton6.getText()){
             case "MODIFICAR":
+                ResultSet rs=Conectar.getTabla("select id from tb_contenido where nombre_contenido='"+jList4.getSelectedValue()+"'"); 
+                
                 try {
-            Statement stm = cn.createStatement();
-            stm.execute("update tb_contenido set nombre_contenido='"+jTextField3.getText()+"' where id=(select id from tb_uneatlantico where nombre_asignatura='"+jList3.getSelectedValue()+"')");
-            mostrar();
-            
-        } catch (SQLException ex) {
-            System.out.print(ex);
-            
-        }
+                    Statement stm = cn.createStatement();
+                    if(rs.next()){
+                        int x=rs.getInt("id");
+                        System.out.println(x);
+                    stm.execute("update tb_contenido set nombre_contenido='"+jTextField3.getText()+"' where id=('"+x+"')");
+                    mostrar();
+                    }
+                } catch (SQLException ex) {
+                    System.err.print(ex);
+
+                }
                 jTextField3.setText("");
                 jButton6.setText("GUARDAR");
                 jPanel4.setVisible(false);
                 break;
             case "GUARDAR":
                 try {
-            Statement stm = cn.createStatement();
-            stm.execute("insert into tb_contenido (nombre_contenido, id_asignatura) values('"+jTextField3.getText()+"', (select id from tb_uneatlantico where nombre_asignatura='"+jList3.getSelectedValue()+"'))");
-            mostrar();
+                    Statement stm = cn.createStatement();
+                    stm.execute("insert into tb_contenido (nombre_contenido, id_asignatura) values('"+jTextField3.getText()+"', (select id from tb_uneatlantico where nombre_asignatura='"+jList3.getSelectedValue()+"'))");
+                    mostrar();
             
-        } catch (SQLException ex) {
-            System.out.print(ex);
-        }
+                } catch (SQLException ex) {
+                    System.out.print(ex);
+                }
                 jTextField3.setText("");
                 jButton6.setText("GUARDAR");
                 jPanel4.setVisible(false);
