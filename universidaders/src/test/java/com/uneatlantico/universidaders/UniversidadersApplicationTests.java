@@ -1,4 +1,4 @@
-package com.uneatlantico.universidaders;
+package com.uneatlantico.Universidaders;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
