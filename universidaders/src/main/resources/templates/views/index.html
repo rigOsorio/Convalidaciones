@@ -8,6 +8,16 @@
     <title th:text="${title}"></title>
 </head>
 <body>
+<form action="#" th:action="@{/rest/universidades/nombreUniversidad}" method="post">
+    <div class="form-group">
+        <select name="nombreUniversidad" id="nombre" class="form-control">
+            <option th:each="universidade: ${universidades}" th:value="${universidade.nombreUniversidad}" th:text="${universidade.nombreUniversidad}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
 <table class="table">
     <thead>
     <tr>
