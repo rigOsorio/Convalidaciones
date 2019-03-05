@@ -1,4 +1,4 @@
-package com.uneatlantico.Universidaders.model;
+package com.uneatlantico.universidaders.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

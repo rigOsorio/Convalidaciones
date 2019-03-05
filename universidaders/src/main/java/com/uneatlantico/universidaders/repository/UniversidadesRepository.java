@@ -1,10 +1,9 @@
-package com.uneatlantico.Universidaders.repository;
+package com.uneatlantico.universidaders.repository;
 
-import com.uneatlantico.Universidaders.model.Universidades;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.uneatlantico.universidaders.model.Universidades;
 
 public interface UniversidadesRepository extends JpaRepository<Universidades, Integer> {
-    List<Universidades> findBynombreUniversidad(String nombreUniversidad);
+    Universidades findBynombreUniversidad(String nombreUniversidad);
 }

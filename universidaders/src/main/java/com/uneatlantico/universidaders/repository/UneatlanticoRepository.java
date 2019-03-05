@@ -1,7 +1,8 @@
-package com.uneatlantico.Universidaders.repository;
+package com.uneatlantico.universidaders.repository;
 
-import com.uneatlantico.Universidaders.model.Uneatlantico;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.uneatlantico.universidaders.model.Uneatlantico;
 
 public interface UneatlanticoRepository extends JpaRepository<Uneatlantico, Integer> {
 }

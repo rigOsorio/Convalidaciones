@@ -1,11 +1,12 @@
-package com.uneatlantico.Universidaders.resource;
+package com.uneatlantico.universidaders.resource;
 
-import com.uneatlantico.Universidaders.model.Uneatlantico;
-import com.uneatlantico.Universidaders.repository.UneatlanticoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.uneatlantico.universidaders.model.Uneatlantico;
+import com.uneatlantico.universidaders.repository.UneatlanticoRepository;
 
 import java.util.List;
 

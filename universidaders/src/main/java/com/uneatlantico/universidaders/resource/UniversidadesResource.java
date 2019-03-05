@@ -1,12 +1,14 @@
-package com.uneatlantico.Universidaders.resource;
+package com.uneatlantico.universidaders.resource;
 
-import com.uneatlantico.Universidaders.model.Universidades;
-import com.uneatlantico.Universidaders.repository.UniversidadesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.uneatlantico.universidaders.model.Grados;
+import com.uneatlantico.universidaders.model.Universidades;
+import com.uneatlantico.universidaders.repository.GradosRepository;
+import com.uneatlantico.universidaders.repository.UniversidadesRepository;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/universidades")
@@ -14,15 +16,26 @@ public class UniversidadesResource {
 
     @Autowired
     UniversidadesRepository universidadesRepository;
+    
+    @Autowired
+    GradosRepository gradoRepository;
 
     @GetMapping("/all")
     public List<Universidades> getAll(){
         return universidadesRepository.findAll();
     }
-
+    
+    @PostMapping(value = "/nombreUniversida")
+    public String getUniversidades(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
+    	Integer idUniversidad= universidadesRepository.findBynombreUniversidad(nombreUniversidad).getId();
+    	return "/rest/grados/carreas/{"+idUniversidad+"}";
+    }
+    
     @PostMapping(value = "/nombreUniversidad")
-    public List<Universidades> getUniversidades(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
-        return universidadesRepository.findBynombreUniversidad(nombreUniversidad);
+    public Integer getidUniversidad(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
+        Integer idUniversidad= universidadesRepository.findBynombreUniversidad(nombreUniversidad).getId();
+        
+        return idUniversidad;
     }
 
     @GetMapping("/id/{id}")
@@ -34,7 +47,6 @@ public class UniversidadesResource {
     public Universidades update(@PathVariable("id") final Integer id,@PathVariable("nombreUniversidad") final String nombreUniversidad){
         Universidades universidades = getId(id);
         universidades.setNombreUniversidad(nombreUniversidad);
-
         return universidadesRepository.save(universidades);
     }
 }
