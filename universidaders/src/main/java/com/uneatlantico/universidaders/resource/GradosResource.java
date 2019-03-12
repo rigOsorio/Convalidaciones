@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.uneatlantico.universidaders.model.Grados;
 import com.uneatlantico.universidaders.repository.GradosRepository;
@@ -17,9 +14,11 @@ import com.uneatlantico.universidaders.repository.GradosRepository;
 public class GradosResource {
 	@Autowired
 	GradosRepository gradosRepository;
+
+
 	
-	@GetMapping("/carreras")
-	public List<Grados> getGrados(int idUniversidad){
+	@GetMapping("/carreras/{id}")
+	public List<Grados> getGrados(@PathVariable(name = "id") final int idUniversidad){
 		return gradosRepository.findByidUniversidad(idUniversidad);
 	}
 	
