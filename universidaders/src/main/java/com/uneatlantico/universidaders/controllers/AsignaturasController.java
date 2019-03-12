@@ -22,5 +22,6 @@ public class AsignaturasController {
         model.addAttribute("universidades",universidades);
         model.addAttribute("title","Pruebas");
         return "views/nombreIndex";
+
     }
 }
