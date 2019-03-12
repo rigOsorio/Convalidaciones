@@ -18,13 +18,9 @@ public class GradosResource {
 	@Autowired
 	GradosRepository gradosRepository;
 	
-	@GetMapping("/carrers/{idUniversidad}")
-	public String getGrados(@PathVariable("idUniversidad") final Integer idUniversidad){
-		Model model = null;
-		List<Grados> grados=gradosRepository.findByidUniversidad(idUniversidad);
-		model.addAttribute("grados",grados);
-        model.addAttribute("title","Pruebas");
-        return "views/grdos";
+	@GetMapping("/carreras")
+	public List<Grados> getGrados(int idUniversidad){
+		return gradosRepository.findByidUniversidad(idUniversidad);
 	}
 	
 	@GetMapping("/all")

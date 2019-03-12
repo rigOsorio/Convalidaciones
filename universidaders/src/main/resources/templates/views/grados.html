@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org/">
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<select name="nombreUniversidad" id="nombre" class="form-control">
-            <option th:each="grados: ${grados}" th:value="${grados.nombreUniversidad}" th:text="${grados.nombreUniversidad}"></option>
+<div class="jumbotron">
+<select name="nombreGrado" id="nombreGrado" class="form-control">
+            <option th:each="grado: ${grados}" th:value="${grado.nombreGrado}" th:text="${grado.nombreGrado}"></option>
         </select>
+</div>
 <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>

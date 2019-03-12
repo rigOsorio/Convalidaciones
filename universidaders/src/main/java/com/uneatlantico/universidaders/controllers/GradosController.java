@@ -11,14 +11,16 @@ import com.uneatlantico.universidaders.model.Grados;
 import com.uneatlantico.universidaders.resource.GradosResource;
 
 @Controller
-@RequestMapping("/hello")
+@RequestMapping("/view")
 public class GradosController {
 	@Autowired
-	GradosResource gredosResource;
+	GradosResource gradosResource;
 	
-	@RequestMapping(value = "/hola")
-    public String index(Model model){
-        List<Grados> grados	 = gredosResource.getAll();
-       return null;
+	@RequestMapping(value = "/grados")
+        public String index2(Model model){
+        List<Grados> grados	 = gradosResource.getAll();
+        model.addAttribute("grados",grados);
+        model.addAttribute("title","Pruebas");
+       return "views/grados";
     }
 }
