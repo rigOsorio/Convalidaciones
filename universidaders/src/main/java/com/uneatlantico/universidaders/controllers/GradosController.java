@@ -20,12 +20,11 @@ public class GradosController {
 	GradosResource gradosResource;
 
 	@PostMapping(value = "/grados")
-
     public String index(@RequestParam("idUniversidad") int idUniversidad,Model model){
         List<Grados> grados	 = gradosResource.getGrados(idUniversidad);
 
         model.addAttribute("grados",grados);
-        model.addAttribute("title","Pruebas");
+        model.addAttribute("title","Grados");
        return "views/grados";
     }
 }
