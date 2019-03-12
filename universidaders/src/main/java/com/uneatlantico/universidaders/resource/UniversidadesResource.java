@@ -1,9 +1,10 @@
 package com.uneatlantico.universidaders.resource;
 
+import com.uneatlantico.universidaders.controllers.GradosController;
+import com.uneatlantico.universidaders.model.Grados;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.uneatlantico.universidaders.model.Grados;
 import com.uneatlantico.universidaders.model.Universidades;
 import com.uneatlantico.universidaders.repository.GradosRepository;
 import com.uneatlantico.universidaders.repository.UniversidadesRepository;
@@ -26,15 +27,14 @@ public class UniversidadesResource {
     }
     
     @PostMapping(value = "/nombreUniversida")
-    public String getUniversidades(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
+    public List<Grados> getUniversidades(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
     	Integer idUniversidad= universidadesRepository.findBynombreUniversidad(nombreUniversidad).getId();
-    	return "/rest/grados/carreas/{"+idUniversidad+"}";
+        return gradoRepository.findByidUniversidad(idUniversidad);
     }
     
     @PostMapping(value = "/nombreUniversidad")
     public Integer getidUniversidad(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
         Integer idUniversidad= universidadesRepository.findBynombreUniversidad(nombreUniversidad).getId();
-        
         return idUniversidad;
     }
 

@@ -7,9 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 <select name="nombreUniversidad" id="nombre" class="form-control">
             <option th:each="grado: ${grados}" th:value="${grado.id}" th:text="${grado.nombreGrado}"></option>
+=======
+<div class="jumbotron">
+<select name="nombreGrado" id="nombreGrado" class="form-control">
+            <option th:each="grado: ${grados}" th:value="${grado.nombreGrado}" th:text="${grado.nombreGrado}"></option>
+>>>>>>> 96941b387a4051530fd3762a3b57b3c4d9358867
         </select>
+</div>
 <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
