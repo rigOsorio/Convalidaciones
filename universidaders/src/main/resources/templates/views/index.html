@@ -8,10 +8,10 @@
     <title th:text="${title}"></title>
 </head>
 <body>
-<form action="#" th:action="@{/rest/universidades/nombreUniversida}" method="post">
+<form action="#" th:action="@{/views/grados}" method="post">
     <div class="form-group">
-        <select name="nombreUniversidad" id="nombre" class="form-control">
-            <option th:each="universidade: ${universidades}" th:value="${universidade.nombreUniversidad}" th:text="${universidade.nombreUniversidad}"></option>
+        <select name="idUniversidad" id="nombre" class="form-control">
+            <option th:each="universidade: ${universidades}" th:value="${universidade.id}" th:text="${universidade.nombreUniversidad}"></option>
         </select>
     </div>
     <div class="form-group">

@@ -19,12 +19,10 @@ public class GradosResource {
 	GradosRepository gradosRepository;
 	
 	@GetMapping("/carrers/{idUniversidad}")
-	public String getGrados(@PathVariable("idUniversidad") final Integer idUniversidad){
-		Model model = null;
+	public List<Grados> getGrados(@PathVariable("idUniversidad") final Integer idUniversidad){
+
 		List<Grados> grados=gradosRepository.findByidUniversidad(idUniversidad);
-		model.addAttribute("grados",grados);
-        model.addAttribute("title","Pruebas");
-        return "views/grdos";
+        return grados;
 	}
 	
 	@GetMapping("/all")
