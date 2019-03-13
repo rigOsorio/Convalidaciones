@@ -30,11 +30,30 @@ public class Asignaturas {
     @Column(name="por_contenido")
     private boolean apruebaPorContenido;
 
+    public Integer getIdAsigantura() {
+        return idAsigantura;
+    }
+
+    public void setIdAsigantura(Integer idAsigantura) {
+        this.idAsigantura = idAsigantura;
+    }
+
     @Column(name="id_outcom")
     private Integer idOutcom;
 
-    @Column(name="id_asignaturas")
-    private Integer idAsignatura;
+    @Column(name="id_asignatura")
+    private  Integer idAsigantura;
+
+    @Column(name="aprueba")
+    private Integer validacion;
+
+    public Integer getValidacion() {
+        return validacion;
+    }
+
+    public void setValidacion(Integer validacion) {
+        this.validacion = validacion;
+    }
 
     public Integer getId() {
         return id;
@@ -100,11 +119,4 @@ public class Asignaturas {
         this.idOutcom = idOutcom;
     }
 
-    public Integer getIdAsignatura() {
-        return idAsignatura;
-    }
-
-    public void setIdAsignatura(Integer idAsignatura) {
-        this.idAsignatura = idAsignatura;
-    }
 }

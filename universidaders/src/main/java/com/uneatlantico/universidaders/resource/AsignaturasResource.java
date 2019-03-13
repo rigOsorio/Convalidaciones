@@ -6,6 +6,7 @@ import com.uneatlantico.universidaders.repository.AsignaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,16 @@ public class AsignaturasResource {
         List<Asignaturas> asignaturas = asignaturaRepository.findAllByIdGrado(IdGrado);
         return  asignaturas;
     }
-    @GetMapping("/contenidoOutcom")
-    public String getOutcom(){
-        return outcomResource.getOutcom(asignaturaRepository.findAll().get(1).getIdOutcom()).getDescripcionOutcom();
+
+    @PostMapping("/aprovadas")
+    public List<Asignaturas> getAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
+        List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
+        List<Asignaturas> listaEquivalencia=new ArrayList<Asignaturas>();//almacena una lista con las asignaturas que equivalen
+        for(int i=0;i<lista.size();i++) {
+            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==1)
+                listaAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+        }
+        return listaAporabadas;
     }
+
 }
