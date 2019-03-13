@@ -23,7 +23,7 @@ public class UniversidadesController {
     public String index(Model model){
         List<Universidades> universidades = universidadesResource.getAll();
        model.addAttribute("universidades",universidades);
-        model.addAttribute("title","Pruebas");
+        model.addAttribute("title","Universidades");
         return "views/index";
     }
 }
