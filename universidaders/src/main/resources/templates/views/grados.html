@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org/">
 <head>
-<meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" crossorigin="anonymous">	
-<title th:text="title">Titulo</title>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" crossorigin="anonymous">
+    <title th:text="title">Titulo</title>
 </head>
 <body>
 <nav th:insert="/views/fragments/general.html"></nav>
 <div class="container">
     <div class="row">
         <div class="col align-self-center">
-            <form action="#" th:action="@{/views/grados}" method="post">
+            <form action="#" th:action="@{/views/asignaturas}" method="post">
                 <div class="form-group">
-                    <select name="nombreGrado" id="nombreGrado" class="form-control">
-                        <option th:each="grado: ${grados}" th:value="${grado.nombreGrado}" th:text="${grado.nombreGrado}"></option>
+                    <select name="IdGrado" id="IdGrado" class="form-control">
+                        <option th:each="grado: ${grados}" th:value="${grado.getId()}" th:text="${grado.getNombreGrado}"></option>
                     </select>
                 </div>
                 <div class="form-group">
