@@ -28,7 +28,6 @@ public class AsignaturasResource {
         List<Asignaturas> asignaturas = asignaturaRepository.findAllByIdGrado(IdGrado);
         return  asignaturas;
     }
-
     @PostMapping("/aprovadas")
     public List<Asignaturas> getAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
         List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
@@ -36,8 +35,8 @@ public class AsignaturasResource {
         for(int i=0;i<lista.size();i++) {
             if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==1)
                 listaAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+                listaEquivalencia.add(asignaturaRepository.findByid(listaAporabadas.get(i).getIdAsigantura()));
         }
         return listaAporabadas;
     }
-
 }
