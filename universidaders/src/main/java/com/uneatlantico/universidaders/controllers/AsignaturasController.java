@@ -23,10 +23,7 @@ public class AsignaturasController {
         model.addAttribute("title","Asignaturas");
         return "views/asignaturas";
     }
-    @RequestMapping(value = "validacion", method = RequestMethod.POST)
-    public ResponseEntity<Asignaturas> valicacion(@RequestBody List<Integer> idAsignatura){
 
-    }
     @GetMapping(value = "asignaturas")
     public String undefined(Model model){
         model.addAttribute("title","Undefined");
