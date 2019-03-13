@@ -14,19 +14,34 @@
 <div class="container">
     <div class="row">
         <div class="col align-self-center">
-            <form action="#" th:action="@{/views/grados}" method="post">
-                <div class="form-group">
-
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+            <div class="container">
+                <form action="javascript:">
+                    <div  class="form-group row">
+                        <div th:each="asigantura:${asiganturas}" class="form-check align-self-center col-4">
+                            <input class="form-check-input" type="checkbox" value="" th:attr="id=${asigantura.getId()}">
+                            <label class="form-check-label"th:attr="id=${asigantura.getId()}" th:for="${asigantura.getId()}" th:text="${asigantura.getNombreAsignatura()}"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script> function Post() {
+    $.ajax({
+        type: "POST",
+        url:"views/validadas",
+        contentType:'application/json',
+        dataType:'json',
+        async: false,
+        data: JSON.stringify({""})
+    });
+}</script>
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
