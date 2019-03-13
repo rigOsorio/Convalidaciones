@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2019 a las 13:00:09
+-- Tiempo de generación: 13-03-2019 a las 13:05:38
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -123,15 +123,15 @@ INSERT INTO `tb_asignaturas` (`id`, `nombre_asignatura`, `id_Grado`, `creditos`,
 (74, 'Economía y Administración de Empresas', 3, 6, 1, 1, 0, 1, 165, 0, NULL),
 (75, 'Estadística y Optimización', 3, 6, 1, 1, 0, 1, 142, 0, NULL),
 (76, 'Introducción a los Computadores', 3, 6, 1, 1, 0, 1, 141, 0, NULL),
-(77, 'Métodos de Programación', 3, 6, 1, 1, 1, 1, 147, 0, NULL),
+(77, 'Métodos de Programación', 3, 6, 1, 1, 1, 1, 147, 0, 1),
 (78, 'Estructura de Computadores', 3, 6, 0, 0, 0, 1, 131, 0, NULL),
 (79, 'Estructuras de Datos', 3, 6, 1, 1, 0, 1, 144, 0, NULL),
-(80, 'Matemática Discreta', 3, 6, 1, 1, 1, 1, 139, 0, NULL),
+(80, 'Matemática Discreta', 3, 6, 1, 1, 1, 1, 139, 0, 1),
 (81, 'Sistemas de Información', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
 (82, 'Valores, Ética y Profesión Informática', 3, 6, 1, 1, 0, 1, 153, 0, NULL),
 (83, 'Algorítmica y Complejidad', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
-(84, 'Bases de Datos', 3, 6, 1, 1, 1, 1, 143, 0, NULL),
-(85, 'Lógica', 3, 6, 1, 1, 1, 1, 140, 0, NULL),
+(84, 'Bases de Datos', 3, 6, 1, 1, 1, 1, 143, 0, 1),
+(85, 'Lógica', 3, 6, 1, 1, 1, 1, 140, 0, 1),
 (86, 'Organización de Computadores', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
 (87, 'Sistemas Operativos', 3, 6, 1, 1, 0, 1, 147, 0, NULL),
 (88, 'Ingeniería del Software I', 3, 6, 1, 1, 0, 1, 151, 0, NULL),
@@ -141,7 +141,7 @@ INSERT INTO `tb_asignaturas` (`id`, `nombre_asignatura`, `id_Grado`, `creditos`,
 (92, 'Programación Paralela, Concurrente y de Tiempo Real', 3, 6, 1, 1, 0, 1, 152, 0, NULL),
 (93, 'Aprendizaje Automático y Minería de Datos', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
 (94, 'Arquitectura e Ingeniería de Computadores', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
-(95, 'Desarrollo de Sistemas de Información', 3, 6, 1, 1, 1, 1, 148, 0, NULL),
+(95, 'Desarrollo de Sistemas de Información', 3, 6, 1, 1, 1, 1, 148, 0, 1),
 (96, 'Ingeniería de Requisitos', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
 (97, 'Ingeniería del Software II', 3, 6, 1, 1, 0, 1, 155, 0, NULL),
 (98, 'Lenguajes Formales', 3, 6, 0, 0, 0, 1, NULL, 0, NULL),
