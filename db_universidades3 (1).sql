@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2018 a las 19:36:20
--- Versión del servidor: 10.1.29-MariaDB
--- Versión de PHP: 7.2.0
+-- Tiempo de generación: 12-03-2019 a las 12:53:26
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_asignaturas` (
   `id` int(11) NOT NULL,
   `nombre_asignatura` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_universidad` int(11) NOT NULL,
+  `id_Grado` int(11) NOT NULL,
   `creditos` float NOT NULL,
   `por_creditos` tinyint(1) NOT NULL,
   `por_outcom` tinyint(1) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `tb_asignaturas` (
 -- Volcado de datos para la tabla `tb_asignaturas`
 --
 
-INSERT INTO `tb_asignaturas` (`id`, `nombre_asignatura`, `id_universidad`, `creditos`, `por_creditos`, `por_outcom`, `por_contenido`, `id_outcom`, `id_asignatura`) VALUES
+INSERT INTO `tb_asignaturas` (`id`, `nombre_asignatura`, `id_Grado`, `creditos`, `por_creditos`, `por_outcom`, `por_contenido`, `id_outcom`, `id_asignatura`) VALUES
 (1, 'Algebra', 2, 6, 0, 0, 0, 1, NULL),
 (2, 'Análisis matemático', 2, 6, 0, 0, 0, 1, NULL),
 (3, 'Estadística', 2, 6, 0, 0, 0, 1, NULL),
@@ -175,6 +175,27 @@ INSERT INTO `tb_asignaturas` (`id`, `nombre_asignatura`, `id_universidad`, `cred
 (128, 'Prácticas Académicas Externas I', 3, 6, 0, 0, 0, 1, NULL),
 (129, 'Prácticas Académicas Externas II', 3, 6, 0, 0, 0, 1, NULL),
 (130, 'Trabajo de Fin de Grado', 3, 12, 1, 0, 0, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_carreras`
+--
+
+CREATE TABLE `tb_carreras` (
+  `id` int(11) NOT NULL,
+  `nombre_Grado` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Universidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tb_carreras`
+--
+
+INSERT INTO `tb_carreras` (`id`, `nombre_Grado`, `id_Universidad`) VALUES
+(1, 'Ingeniería Informática en Tecnologías de la Información', 1),
+(2, 'Ingeniería Informática', 2),
+(3, 'Ingeniería Informática', 3);
 
 -- --------------------------------------------------------
 
@@ -648,65 +669,66 @@ CREATE TABLE `tb_uneatlantico` (
   `id` int(11) NOT NULL,
   `nombre_asignatura` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `creditos` int(11) NOT NULL,
-  `id_outcom` int(11) NOT NULL
+  `id_outcom` int(11) NOT NULL,
+  `nombre_universidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tb_uneatlantico`
 --
 
-INSERT INTO `tb_uneatlantico` (`id`, `nombre_asignatura`, `creditos`, `id_outcom`) VALUES
-(1, 'Tecnología y Estructura de Ordenadores', 6, 5),
-(2, 'Programación I', 6, 3),
-(3, 'Introducción a la Gestión de Proyectos de Software', 6, 4),
-(4, 'Matemática I', 6, 1),
-(5, 'Física', 6, 2),
-(6, 'Matemática II', 6, 1),
-(7, 'Programación II', 6, 3),
-(8, 'Tecnologias de la Informacion y Comunicación', 6, 4),
-(9, 'Matematica Discreta', 6, 1),
-(10, 'Logica', 6, 1),
-(11, 'Redes de Ordenadores', 6, 6),
-(12, 'Estadística', 6, 1),
-(13, 'Bases de Datos I', 6, 4),
-(14, 'Estructuras de Datos y Algoritmos I', 6, 3),
-(15, 'Matematica Numerica', 6, 1),
-(16, 'Lenguajes de Programación', 6, 3),
-(17, 'Sistemas Operativos', 6, 6),
-(18, 'Bases de Datos II', 6, 4),
-(19, 'Estructuras de Datos y Algoritmos II', 6, 3),
-(20, 'Inglés II', 6, 7),
-(21, 'Ingeniería de Software I', 6, 4),
-(22, 'Sistemas Distribuidos y Programación en Paralelo', 6, 6),
-(23, 'Ética y Legislación Informática', 6, 8),
-(24, 'Inglés III', 6, 7),
-(25, 'Ingeniería de Software II', 6, 4),
-(26, 'Dirección de Sistemas de Información', 6, 4),
-(27, 'Seguridad Informática y Criptografía', 6, 6),
-(28, 'Inglés IV', 6, 7),
-(29, 'Practicum', 6, 14),
-(30, 'Programación Web I', 6, 3),
-(31, 'Inteligencia Artificial', 6, 4),
-(32, 'Proyectos', 6, 4),
-(33, 'Trabajo de Fin de Grado', 12, 15),
-(34, 'Programación Web II', 6, 3),
-(35, 'Economía de la Empresa y Emprendedores', 6, 9),
-(36, 'Organización de Empresas', 6, 11),
-(37, 'Investigación de Mercados', 6, 12),
-(38, 'Teoría y Práctica de la Comunicación Visual', 6, 13),
-(39, 'Contabilidad I', 6, 10),
-(40, 'Recursos Humanos', 6, 11),
-(41, 'Marketing Estratégico y Operativo', 6, 12),
-(42, 'Sociedad de la Información y el Conocimiento', 6, 13),
-(43, 'Contabilidad II', 6, 10),
-(44, 'Automática y Control', 6, 11),
-(45, 'Marketing Digital y Medios Interactivos', 6, 12),
-(46, 'Animación Digital', 6, 13),
-(47, 'Matemáticas Financieras', 6, 10),
-(48, 'Administración de la Producción y Logística', 6, 11),
-(49, 'Comunicación Corporativa e Institucional', 6, 12),
-(50, 'Creación de Productos Multimedia', 6, 13),
-(51, 'Análisis de Estados Financieros', 6, 10);
+INSERT INTO `tb_uneatlantico` (`id`, `nombre_asignatura`, `creditos`, `id_outcom`, `nombre_universidad`) VALUES
+(1, 'Tecnología y Estructura de Ordenadores', 6, 5, NULL),
+(2, 'Programación I', 6, 3, NULL),
+(3, 'Introducción a la Gestión de Proyectos de Software', 6, 4, NULL),
+(4, 'Matemática I', 6, 1, NULL),
+(5, 'Física', 6, 2, NULL),
+(6, 'Matemática II', 6, 1, NULL),
+(7, 'Programación II', 6, 3, NULL),
+(8, 'Tecnologias de la Informacion y Comunicación', 6, 4, NULL),
+(9, 'Matematica Discreta', 6, 1, NULL),
+(10, 'Logica', 6, 1, NULL),
+(11, 'Redes de Ordenadores', 6, 6, NULL),
+(12, 'Estadística', 6, 1, NULL),
+(13, 'Bases de Datos I', 6, 4, NULL),
+(14, 'Estructuras de Datos y Algoritmos I', 6, 3, NULL),
+(15, 'Matematica Numerica', 6, 1, NULL),
+(16, 'Lenguajes de Programación', 6, 3, NULL),
+(17, 'Sistemas Operativos', 6, 6, NULL),
+(18, 'Bases de Datos II', 6, 4, NULL),
+(19, 'Estructuras de Datos y Algoritmos II', 6, 3, NULL),
+(20, 'Inglés II', 6, 7, NULL),
+(21, 'Ingeniería de Software I', 6, 4, NULL),
+(22, 'Sistemas Distribuidos y Programación en Paralelo', 6, 6, NULL),
+(23, 'Ética y Legislación Informática', 6, 8, NULL),
+(24, 'Inglés III', 6, 7, NULL),
+(25, 'Ingeniería de Software II', 6, 4, NULL),
+(26, 'Dirección de Sistemas de Información', 6, 4, NULL),
+(27, 'Seguridad Informática y Criptografía', 6, 6, NULL),
+(28, 'Inglés IV', 6, 7, NULL),
+(29, 'Practicum', 6, 14, NULL),
+(30, 'Programación Web I', 6, 3, NULL),
+(31, 'Inteligencia Artificial', 6, 4, NULL),
+(32, 'Proyectos', 6, 4, NULL),
+(33, 'Trabajo de Fin de Grado', 12, 15, NULL),
+(34, 'Programación Web II', 6, 3, NULL),
+(35, 'Economía de la Empresa y Emprendedores', 6, 9, NULL),
+(36, 'Organización de Empresas', 6, 11, NULL),
+(37, 'Investigación de Mercados', 6, 12, NULL),
+(38, 'Teoría y Práctica de la Comunicación Visual', 6, 13, NULL),
+(39, 'Contabilidad I', 6, 10, NULL),
+(40, 'Recursos Humanos', 6, 11, NULL),
+(41, 'Marketing Estratégico y Operativo', 6, 12, NULL),
+(42, 'Sociedad de la Información y el Conocimiento', 6, 13, NULL),
+(43, 'Contabilidad II', 6, 10, NULL),
+(44, 'Automática y Control', 6, 11, NULL),
+(45, 'Marketing Digital y Medios Interactivos', 6, 12, NULL),
+(46, 'Animación Digital', 6, 13, NULL),
+(47, 'Matemáticas Financieras', 6, 10, NULL),
+(48, 'Administración de la Producción y Logística', 6, 11, NULL),
+(49, 'Comunicación Corporativa e Institucional', 6, 12, NULL),
+(50, 'Creación de Productos Multimedia', 6, 13, NULL),
+(51, 'Análisis de Estados Financieros', 6, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -737,10 +759,17 @@ INSERT INTO `tb_universidades` (`id`, `nombre_universidad`) VALUES
 --
 ALTER TABLE `tb_asignaturas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_universidad` (`id_universidad`),
+  ADD KEY `id_universidad` (`id_Grado`),
   ADD KEY `id_outcom` (`id_outcom`),
   ADD KEY `id` (`id`),
   ADD KEY `id_asignatura` (`id_asignatura`);
+
+--
+-- Indices de la tabla `tb_carreras`
+--
+ALTER TABLE `tb_carreras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUniversidad` (`id_Universidad`);
 
 --
 -- Indices de la tabla `tb_contenido`
@@ -786,6 +815,12 @@ ALTER TABLE `tb_asignaturas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
+-- AUTO_INCREMENT de la tabla `tb_carreras`
+--
+ALTER TABLE `tb_carreras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tb_contenido`
 --
 ALTER TABLE `tb_contenido`
@@ -823,9 +858,15 @@ ALTER TABLE `tb_universidades`
 -- Filtros para la tabla `tb_asignaturas`
 --
 ALTER TABLE `tb_asignaturas`
-  ADD CONSTRAINT `tb_asignaturas_ibfk_1` FOREIGN KEY (`id_universidad`) REFERENCES `tb_universidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_asignaturas_ibfk_2` FOREIGN KEY (`id_outcom`) REFERENCES `tb_outcom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_asignaturas_ibfk_3` FOREIGN KEY (`id_asignatura`) REFERENCES `tb_uneatlantico` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_asignaturas_ibfk_3` FOREIGN KEY (`id_asignatura`) REFERENCES `tb_uneatlantico` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_asignaturas_ibfk_4` FOREIGN KEY (`id_Grado`) REFERENCES `tb_carreras` (`id`);
+
+--
+-- Filtros para la tabla `tb_carreras`
+--
+ALTER TABLE `tb_carreras`
+  ADD CONSTRAINT `tb_carreras_ibfk_1` FOREIGN KEY (`id_Universidad`) REFERENCES `tb_universidades` (`id`);
 
 --
 -- Filtros para la tabla `tb_contenido`

@@ -10,17 +10,25 @@
 </head>
 <body>
 <header>
+    <nav th:insert="/views/fragments/general.html"></nav>
 </header>
-<form action="#" th:action="@{/views/grados}" method="post">
-    <div class="form-group">
-        <select name="idUniversidad" id="nombre" class="form-control">
-            <option th:each="universidade: ${universidades}" th:value="${universidade.id}" th:text="${universidade.nombreUniversidad}"></option>
-        </select>
+<div class="container">
+    <div class="row">
+        <div class="col align-self-center">
+            <form action="#" th:action="@{/views/grados}" method="post">
+                <div class="form-group">
+                    <select name="idUniversidad" id="nombre" class="form-control">
+                        <option th:each="universidade: ${universidades}" th:value="${universidade.id}" th:text="${universidade.nombreUniversidad}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+</div>
+
 <!--
 <table class="table">
     <thead>
