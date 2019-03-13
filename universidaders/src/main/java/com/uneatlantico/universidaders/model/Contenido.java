@@ -12,9 +12,6 @@ public class Contenido {
     @Column(name="id")
     private Integer id;
 
-    @Column(name = "nombre_asignatura")
-    private String nombreAsignatura;
-
     @Column(name="creditos")
     private Integer creditoss;
 
@@ -37,8 +34,6 @@ public class Contenido {
         this.idOutcom = idOutcom;
     }
 
-
-
     public Integer getId() {
         return id;
     }
@@ -47,11 +42,4 @@ public class Contenido {
         this.id = id;
     }
 
-    public String getNombreAsignatura() {
-        return nombreAsignatura;
-    }
-
-    public void setNombreAsignatura(String nombreAsignatura) {
-        this.nombreAsignatura = nombreAsignatura;
-    }
 }
