@@ -13,16 +13,16 @@ import com.uneatlantico.universidaders.resource.GradosResource;
 @Controller
 @RequestMapping("views")
 public class GradosController {
-	@Autowired
-	GradosResource gradosResource;
+    @Autowired
+    GradosResource gradosResource;
 
-	@PostMapping(value = "grados")
+    @PostMapping(value = "grados")
     public String index(@RequestParam("idUniversidad") int idUniversidad,Model model){
         List<Grados> grados	 = gradosResource.getGrados(idUniversidad);
 
         model.addAttribute("grados",grados);
         model.addAttribute("title","Grados");
-       return "views/grados";
+        return "views/grados";
     }
     @GetMapping(value = "grados")
     public String undefined(Model model){

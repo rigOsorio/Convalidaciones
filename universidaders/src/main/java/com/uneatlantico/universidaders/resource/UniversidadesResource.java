@@ -23,7 +23,9 @@ public class UniversidadesResource {
 
     @GetMapping("/all")
     public List<Universidades> getAll(){
-        return universidadesRepository.findAll();
+        List<Universidades> lista=universidadesRepository.findAll();
+        lista.remove(universidadesRepository.findAll().get(3));
+        return lista;
     }
     
     @PostMapping(value = "/nombreUniversida")
