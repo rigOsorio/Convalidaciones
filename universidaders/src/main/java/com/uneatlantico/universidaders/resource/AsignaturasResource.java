@@ -37,4 +37,9 @@ public class AsignaturasResource {
         }
         return listaAporabadas;
     }
+
+    public Asignaturas getAsignatura(Integer id){
+        return asignaturaRepository.findByid(id);
+    }
+
 }

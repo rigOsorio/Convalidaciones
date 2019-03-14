@@ -1,7 +1,9 @@
 package com.uneatlantico.universidaders.controllers;
 
 import com.uneatlantico.universidaders.model.Asignaturas;
+import com.uneatlantico.universidaders.model.Contenido;
 import com.uneatlantico.universidaders.resource.AsignaturasResource;
+import com.uneatlantico.universidaders.resource.ContenidoResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import java.util.List;
 public class ValidadasController {
     @Autowired
     AsignaturasResource asignaturasResource;
+
+    @Autowired
+    ContenidoResource contenidoResource;
 
     @PostMapping(value = "validadas")
     public String valicacion(@RequestParam String idAsignatura, Model model){
@@ -41,4 +46,6 @@ public class ValidadasController {
         }
         return listaId;
     }
+
+
 }
