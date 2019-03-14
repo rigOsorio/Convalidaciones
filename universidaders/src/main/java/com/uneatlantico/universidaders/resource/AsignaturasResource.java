@@ -40,6 +40,15 @@ public class AsignaturasResource {
         }
         return listaAporabadas;
     }
+    public List<Asignaturas> getNoAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
+        List<Asignaturas> listaNoAporabadas=new ArrayList<Asignaturas>();
+        for(int i=0;i<lista.size();i++) {
+            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==0) {
+                listaNoAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+            }
+        }
+        return listaNoAporabadas;
+    }
 
     public Asignaturas getAsignatura(Integer id){
         return asignaturaRepository.findByid(id);
@@ -52,6 +61,7 @@ public class AsignaturasResource {
     public List<String> getContenido(Integer id){
         return contenidoResource.getContenido(id);
     }
+
 
 
 }
