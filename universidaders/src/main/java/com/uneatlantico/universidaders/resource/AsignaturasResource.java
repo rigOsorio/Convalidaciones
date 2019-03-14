@@ -15,6 +15,9 @@ public class AsignaturasResource {
     @Autowired
     AsignaturaRepository asignaturaRepository;
 
+    @Autowired
+    ContenidoResource contenidoResource;
+
     @GetMapping("/all")
     public List<Asignaturas> getAll(){
         return asignaturaRepository.findAll();
@@ -41,5 +44,14 @@ public class AsignaturasResource {
     public Asignaturas getAsignatura(Integer id){
         return asignaturaRepository.findByid(id);
     }
+
+    public Integer getCreditos(Integer id){
+        return asignaturaRepository.findByid(id).getCreditoss();
+    }
+
+    public List<String> getContenido(Integer id){
+        return contenidoResource.getContenido(id);
+    }
+
 
 }
