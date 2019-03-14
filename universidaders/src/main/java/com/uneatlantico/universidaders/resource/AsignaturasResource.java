@@ -18,6 +18,9 @@ public class AsignaturasResource {
     @Autowired
     ContenidoResource contenidoResource;
 
+    @Autowired
+    OutcomResource  outcomResource;
+
     @GetMapping("/all")
     public List<Asignaturas> getAll(){
         return asignaturaRepository.findAll();
@@ -62,6 +65,8 @@ public class AsignaturasResource {
         return contenidoResource.getContenido(id);
     }
 
-
+    public String getOutcom(Integer idOutcom){
+        return outcomResource.getOUtcom(idOutcom);
+    }
 
 }
