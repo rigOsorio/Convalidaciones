@@ -5,6 +5,7 @@ import com.uneatlantico.universidaders.repository.ContenidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,13 @@ public class ContenidoResource {
     }
 
     @GetMapping("/asi/{idAsignaturas}")
-    public List<Contenido> getContenido(@PathVariable("idAsignaturas") final Integer idAsignaturas)
+    public List<String> getContenido(@PathVariable("idAsignaturas") final Integer idAsignaturas)
     {
-        return contenidoRepository.findByidAsignatura(idAsignaturas);
+        List<String> listaContenido=new ArrayList<String>();
+        for(int i=0;i<contenidoRepository.findByidAsignatura(idAsignaturas).size();i++) {
+            listaContenido.add(contenidoRepository.findByidAsignatura(idAsignaturas).get(i).getContenidos());
+        }
+        return listaContenido;
     }
 
 }
