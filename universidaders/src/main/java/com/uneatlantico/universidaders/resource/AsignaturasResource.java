@@ -18,6 +18,9 @@ public class AsignaturasResource {
     @Autowired
     ContenidoResource contenidoResource;
 
+    @Autowired
+    OutcomResource  outcomResource;
+
     @GetMapping("/all")
     public List<Asignaturas> getAll(){
         return asignaturaRepository.findAll();
@@ -40,9 +43,19 @@ public class AsignaturasResource {
         }
         return listaAporabadas;
     }
-    public List<Asignaturas> getUneatlantico(){
+    public List<Asignaturas> getUneatlantico() {
 
         return asignaturaRepository.findAllByIdGrado(4);
+    }
+
+    public List<Asignaturas> getNoAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
+        List<Asignaturas> listaNoAporabadas=new ArrayList<Asignaturas>();
+        for(int i=0;i<lista.size();i++) {
+            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==0) {
+                listaNoAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+            }
+        }
+        return listaNoAporabadas;
     }
 
     public Asignaturas getAsignatura(Integer id){
@@ -57,5 +70,8 @@ public class AsignaturasResource {
         return contenidoResource.getContenido(id);
     }
 
+    public String getOutcom(Integer idOutcom){
+        return outcomResource.getContenidoOutcom(idOutcom);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.uneatlantico.universidaders.controllers;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.uneatlantico.universidaders.model.Asignaturas;
 import com.uneatlantico.universidaders.model.Contenido;
 import com.uneatlantico.universidaders.resource.AsignaturasResource;
@@ -28,10 +29,13 @@ public class ValidadasController {
         List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
         List<Asignaturas> uneatlantico = asignaturasResource.getUneatlantico();
         List<String> contenidos = contenidoResource.getAll();
+        List<Asignaturas> noAprov = asignaturasResource.getNoAprobadas(separarId(idAsignatura));
         model.addAttribute("ids",asignaturas);
         model.addAttribute("uneatlantico",uneatlantico);
         model.addAttribute("aasignaturaResource",asignaturasResource);
+        model.addAttribute("asignaturasNoAprobadas",noAprov);
         model.addAttribute("contenidos",contenidos);
+        model.addAttribute("keys",separarId(idAsignatura));
 
         model.addAttribute("title","Validacion");
 

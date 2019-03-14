@@ -25,4 +25,8 @@ public class OutcomResource {
     public Outcom getOutcom(@PathVariable("id") final Integer id){
         return outcomRepository.findByid(id);
     }
+
+    public String getContenidoOutcom(Integer id){
+        return outcomRepository.findByid(id).getDescripcionOutcom();
+    }
 }
