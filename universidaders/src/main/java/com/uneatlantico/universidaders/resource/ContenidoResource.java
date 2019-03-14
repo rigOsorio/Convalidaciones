@@ -15,8 +15,13 @@ public class ContenidoResource {
     ContenidoRepository contenidoRepository;
 
     @GetMapping("/all")
-    public List<Contenido> getAll(){
-        return contenidoRepository.findAll();
+    public List<String> getAll(){
+        List<String> contenidoR = new ArrayList<>();
+        for (Contenido contenido: contenidoRepository.findAll()
+             ) {
+            contenidoR.add(contenido.getContenidos());
+        }
+        return contenidoR;
     }
 
     @GetMapping("/asi/{idAsignaturas}")

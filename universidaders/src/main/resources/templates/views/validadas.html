@@ -13,36 +13,39 @@
 </header>
 <div class="container">
     <div class="row">
-        <div th:each="asignatura:${ids}" class="col-4">
-            <div  class="card text-white bg-success mb-6" th:attr="id='heading'+${asignatura.getId()}">
-                <div class="card-header"><h3 th:text="${asignatura.getNombreAsignatura()}"></h3></div>
-                <div class="card-body" data-toggle="collapse" th:attr="data-target='#collapse'+${asignatura.getIdAsigantura()},aria-expanded=false,aria-controls='collapse'+${asignatura.getIdAsigantura()}">
-                    <h5 class="card-title">Success card title</h5>
+        <div th:each="asignatura:${ids}" class="col-6" >
+            <div id="aprobadas">
+
+                <div class="card text-white bg-success mb-6" th:attr="id='heading'+${asignatura.getId()}" >
+                    <div class="card-header"><button class="btn collapsed" th:text="${asignatura.getNombreAsignatura()}" data-toggle='collapse'th:attr=" data-target='#collapse'+${asignatura.getIdAsigantura()}, aria-expanded='false', aria-controls='collapse'+${asignatura.getIdAsigantura()}"></button></div>
+                    <div class="card-body" >
+                        <h5 class="card-title" th:text="'Creditos: '+${asignatura.getCreditoss()}">Success card title</h5>
+                        <h5>Contenidos: </h5>
+                        <p th:each="contenido:${aasignaturaResource.getContenido(asignatura.getId())}" class="card-text" th:text="${contenido}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <div class="collapse multi-collapse" th:attr="id='collapse'+${asignatura.getIdAsigantura()}" >
+
+                        <div class="card-header bg-info"><h3 th:text="${aasignaturaResource.getAsignatura(asignatura.getIdAsigantura()).getNombreAsignatura()}"></h3></div>
+                        <div class="card-body bg-info">
+                            <h5 class="card-title" th:text="'Creditos: '+${aasignaturaResource.getAsignatura(asignatura.getIdAsigantura()).getCreditoss()}">Success card title</h5>
+                            <h5>Contenidos: </h5>
+                            <p th:each="contenido:${aasignaturaResource.getContenido(aasignaturaResource.getAsignatura(asignatura.getIdAsigantura()).getId())}" class="card-text" th:text="${contenido}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-danger mb-3" >
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h5 class="card-title">Danger card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
             </div>
         </div>
-        <div class="card">
-        <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Collapsible Group Item #1
-                </button>
-            </h2>
-        </div>
-
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
-        </div>
     </div>
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-                <h5 class="card-title">Danger card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-    </div>
+</div>
 </div>
     <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
