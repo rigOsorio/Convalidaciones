@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,14 +23,13 @@ public class AsignaturasController {
         model.addAttribute("asiganturas",asignaturas);
         model.addAttribute("title","Asignaturas");
         return "views/asignaturas";
-    }/*
-    @RequestMapping(value = "validacion", method = RequestMethod.POST)
-    public ResponseEntity<Asignaturas> valicacion(@RequestBody List<Integer> idAsignatura){
+    }
 
-    }*/
     @GetMapping(value = "asignaturas")
     public String undefined(Model model){
         model.addAttribute("title","Undefined");
+
         return "views/undefined";
     }
+
 }

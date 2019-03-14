@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+</head>
+<body>
+<header>
+    <nav th:insert="/views/fragments/general.html"></nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col align-self-center">
+            <div class="container">
+                <form action=""th:action="@{validadas}" id="formulario" method="post">
+                    <div  class="form-group row">
+                        <div th:each="asigantura:${asiganturas}" class="form-check align-self-center col-4">
+                            <input class="form-check-input" type="checkbox"   th:attr="value=${asigantura.getId()},name=${'idAsignatura'+asigantura.getId()}, id=${asigantura.getId()}">
+                            <label class="form-check-label"th:attr="id=${asigantura.getId()}" th:for="${asigantura.getId()}" th:text="${asigantura.getNombreAsignatura()}"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" value="stop" name="idAsignatura" id="idAsignatura">
+                        <button type="submit" id="boton" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $("#boton").click(function () {
+        var dataReal='';
+        var datas=$('#formulario').serializeArray().reduce(function (obj,item) {
+            obj[item.name]=item.value;
+            return obj;
+        },{});
+        $.each(datas,function (index,value) {
+            console.log(index+":"+value);
+            if(dataReal=='')
+                dataReal+=value;
+            else if (value=="stop")
+                dataReal+=""
+            else
+                dataReal+=","+value;
+        });
+        console.log(datas);
+        console.log(dataReal);
+        $("#idAsignatura").attr('value',dataReal);
+    });
+   </script>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
