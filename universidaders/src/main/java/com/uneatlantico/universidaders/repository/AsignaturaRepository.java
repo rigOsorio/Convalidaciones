@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface AsignaturaRepository extends JpaRepository<Asignaturas,Integer> {
     public List<Asignaturas> findAllByIdGrado(@PathVariable("IdGrado") final int IdGrado);
+    public Asignaturas findByid(Integer id);
 }

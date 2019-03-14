@@ -13,7 +13,7 @@
 </header>
 <div class="container">
     <div class="row">
-        <h1  th:text="${ids}"></h1>
+        <h1 th:each="asignatura:${ids}"  th:text="${asignatura.getNombreAsignatura()}"></h1>
     </div>
 </div>
     <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
