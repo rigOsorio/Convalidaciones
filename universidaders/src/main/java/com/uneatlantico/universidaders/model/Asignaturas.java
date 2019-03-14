@@ -22,13 +22,13 @@ public class Asignaturas {
     private Integer creditoss;
 
     @Column(name="por_creditos")
-    private boolean  apruebaPorCreditos;
+    private Integer  apruebaPorCreditos;
 
     @Column(name="por_outcom")
-    private boolean apruebaPorCompetencias;
+    private Integer apruebaPorCompetencias;
 
     @Column(name="por_contenido")
-    private boolean apruebaPorContenido;
+    private Integer apruebaPorContenido;
 
     public Integer getIdAsigantura() {
         return idAsigantura;
@@ -87,27 +87,27 @@ public class Asignaturas {
         this.creditoss = creditoss;
     }
 
-    public boolean isApruebaPorCreditos() {
+    public Integer isApruebaPorCreditos() {
         return apruebaPorCreditos;
     }
 
-    public void setApruebaPorCreditos(boolean apruebaPorCreditos) {
+    public void setApruebaPorCreditos(Integer apruebaPorCreditos) {
         this.apruebaPorCreditos = apruebaPorCreditos;
     }
 
-    public boolean isApruebaPorCompetencias() {
+    public Integer isApruebaPorCompetencias() {
         return apruebaPorCompetencias;
     }
 
-    public void setApruebaPorCompetencias(boolean apruebaPorCompetencias) {
+    public void setApruebaPorCompetencias(Integer apruebaPorCompetencias) {
         this.apruebaPorCompetencias = apruebaPorCompetencias;
     }
 
-    public boolean isApruebaPorContenido() {
+    public Integer isApruebaPorContenido() {
         return apruebaPorContenido;
     }
 
-    public void setApruebaPorContenido(boolean apruebaPorContenido) {
+    public void setApruebaPorContenido(Integer apruebaPorContenido) {
         this.apruebaPorContenido = apruebaPorContenido;
     }
 

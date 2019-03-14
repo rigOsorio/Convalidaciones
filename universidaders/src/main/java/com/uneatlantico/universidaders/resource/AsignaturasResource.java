@@ -30,7 +30,7 @@ public class AsignaturasResource {
         List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
         List<Asignaturas> listaEquivalencia=new ArrayList<Asignaturas>();//almacena una lista con las asignaturas que equivalen
         for(int i=0;i<lista.size();i++) {
-            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==1) {
+            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==0) {
                 listaAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
                 listaEquivalencia.add(asignaturaRepository.findByid(listaAporabadas.get(i).getIdAsigantura()));
             }
