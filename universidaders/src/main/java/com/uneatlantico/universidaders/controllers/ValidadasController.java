@@ -9,13 +9,17 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping(value = "views")
 public class ValidadasController {
-    @RequestMapping(value = "validadas",method = RequestMethod.POST)
-    @ResponseBody
-    public String valicacion(@RequestBody String idAsignatura, Model model){
+    @PostMapping(value = "validadas")
+    public String valicacion(@RequestParam String idAsignatura, Model model){
         model.addAttribute("ids",idAsignatura);
-        System.out.print(idAsignatura);
+
         model.addAttribute("title","Validacion");
-        System.out.print(idAsignatura+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        return "redirect:/validadas";
+
+        return"views/validadas";
+    }
+    @GetMapping(value = "validadas")
+    public String undefined(Model model){
+
+        return "views/validadas";
     }
 }
