@@ -21,7 +21,7 @@ public class UniversidadesController {
 
     @RequestMapping(value = "")
     public String index(Model model){
-        List<Universidades> universidades = universidadesResource.getAll();
+        List<Universidades> universidades = universidadesResource.getAllminusUNEAT();
        model.addAttribute("universidades",universidades);
         model.addAttribute("title","Universidades");
         return "views/index";

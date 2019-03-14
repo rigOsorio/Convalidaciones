@@ -26,6 +26,13 @@ public class UniversidadesResource {
         return universidadesRepository.findAll();
     }
     
+    public List<Universidades> getAllminusUNEAT(){
+    	List<Universidades> lista=universidadesRepository.findAll();
+        lista.remove(universidadesRepository.findAll().get(3));
+        return lista;
+    }
+    
+    
     @PostMapping(value = "/nombreUniversida")
     public List<Grados> getUniversidades(@RequestParam(name = "nombreUniversidad") final String nombreUniversidad){
     	Integer idUniversidad= universidadesRepository.findBynombreUniversidad(nombreUniversidad).getId();

@@ -19,9 +19,8 @@ public class GradosController {
 	@PostMapping(value = "grados")
     public String index(@RequestParam("idUniversidad") int idUniversidad,Model model){
         List<Grados> grados	 = gradosResource.getGrados(idUniversidad);
-
         model.addAttribute("grados",grados);
-        model.addAttribute("title","Grados");
+        model.addAttribute("title","Asignaturas");
        return "views/grados";
     }
     @GetMapping(value = "grados")
