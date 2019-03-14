@@ -2,6 +2,7 @@
 package com.uneatlantico.universidaders.resource;
 
 import com.uneatlantico.universidaders.model.Asignaturas;
+import com.uneatlantico.universidaders.model.Outcom;
 import com.uneatlantico.universidaders.repository.AsignaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ import java.util.List;
 public class AsignaturasResource {
     @Autowired
     AsignaturaRepository asignaturaRepository;
+
+    private List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
+    private List<Asignaturas> listaEquivalencia=new ArrayList<Asignaturas>();//almacena una lista con las asignaturas que equivalen
 
     @Autowired
     OutcomResource outcomResource;
@@ -30,13 +34,28 @@ public class AsignaturasResource {
     }
     @PostMapping("/aprovadas")
     public List<Asignaturas> getAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
-        List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
-        List<Asignaturas> listaEquivalencia=new ArrayList<Asignaturas>();//almacena una lista con las asignaturas que equivalen
         for(int i=0;i<lista.size();i++) {
             if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==1)
                 listaAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
                 listaEquivalencia.add(asignaturaRepository.findByid(listaAporabadas.get(i).getIdAsigantura()));
         }
         return listaAporabadas;
+    }
+    public List<Outcom> getListaOutcom(List<Asignaturas> lista) {
+        List<Outcom>lista2=new ArrayList<>();
+        for(int j=0;j<lista.size();j++){
+            lista2.add(outcomResource.getOutcom(lista.get(j).getIdOutcom()));
+        }
+        return lista2;
+    }
+
+    public List<Integer> separarId(String lista){
+        String[] list;
+        List<Integer> listaId=new ArrayList<Integer>();
+        list=(lista.split(","));
+        for(int i=0;i<list.length;i++){
+            listaId.add(Integer.parseInt(list[i]));
+        }
+        return listaId;
     }
 }
