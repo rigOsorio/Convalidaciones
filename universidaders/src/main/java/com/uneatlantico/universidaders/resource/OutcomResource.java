@@ -26,7 +26,7 @@ public class OutcomResource {
         return outcomRepository.findByid(id);
     }
 
-    public String getOUtcom(Integer id){
+    public String getContenidoOutcom(Integer id){
         return outcomRepository.findByid(id).getDescripcionOutcom();
     }
 }

@@ -66,7 +66,7 @@ public class AsignaturasResource {
     }
 
     public String getOutcom(Integer idOutcom){
-        return outcomResource.getOUtcom(idOutcom);
+        return outcomResource.getContenidoOutcom(idOutcom);
     }
 
 }
