@@ -43,6 +43,8 @@
             console.log(index+":"+value);
             if(dataReal=='')
                 dataReal+=value;
+            else if (value=="stop")
+                dataReal+=""
             else
                 dataReal+=","+value;
         });
