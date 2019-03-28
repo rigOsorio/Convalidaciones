@@ -1,6 +1,9 @@
 package com.uneatlantico.universidaders.resource;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,17 +20,17 @@ public class GradosResource {
 
 
 
-	@GetMapping("/carrers/{idUniversidad}")
-	public List<Grados> getGrados(@PathVariable("idUniversidad") final Integer idUniversidad) {
-
-		List<Grados> grados = gradosRepository.findByidUniversidad(idUniversidad);
+	@PostMapping("/ByidUniversidad")
+	public List<Grados> getGrados(@RequestBody Map<String,Integer> json){
+		Iterator iterator = json.keySet().iterator();
+		List<Grados> grados = new ArrayList<>();
+		if(iterator.hasNext()) {
+			String i = iterator.next().toString();
+			grados= gradosRepository.findByidUniversidad(json.get(i));
+		}
 		return grados;
 	}
-	@GetMapping("/carreras/{id}")
-	public List<Grados> getGrados(@PathVariable(name = "id") final int idUniversidad){
-		return gradosRepository.findByidUniversidad(idUniversidad);
-	}
-	
+
 	@GetMapping("/all")
 	public List<Grados> getAll(){
 		return gradosRepository.findAll();

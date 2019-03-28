@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "views")
@@ -19,7 +21,9 @@ public class AsignaturasController {
 
     @PostMapping(value = "asignaturas")
     public String index(@RequestParam("IdGrado") int IdGrado, Model model){
-        List<Asignaturas> asignaturas = asignaturasResource.findByIdGrado(IdGrado);
+        Map <String,Integer> algo = new HashMap<String,Integer>();
+        algo.put("hola",IdGrado);
+        List<Asignaturas> asignaturas = asignaturasResource.findByIdGrado(algo);
         model.addAttribute("asiganturas",asignaturas);
         model.addAttribute("title","Asignaturas");
         return "views/asignaturas";

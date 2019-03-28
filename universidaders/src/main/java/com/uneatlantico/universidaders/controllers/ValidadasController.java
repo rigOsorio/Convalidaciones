@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "views")
@@ -46,12 +48,12 @@ public class ValidadasController {
 
         return "views/validadas";
     }
-    public List<Integer> separarId(String lista){
+    public Map<String,Integer> separarId(String lista){
         String[] list;
-        List<Integer> listaId=new ArrayList<Integer>();
+        Map<String,Integer> listaId=new HashMap<>();
         list=(lista.split(","));
         for(int i=0;i<list.length;i++){
-            listaId.add(Integer.parseInt(list[i]));
+            listaId.put("jaja"+i,Integer.parseInt(list[i]));
         }
         return listaId;
     }

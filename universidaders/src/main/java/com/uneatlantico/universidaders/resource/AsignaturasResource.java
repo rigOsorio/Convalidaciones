@@ -28,9 +28,14 @@ public class AsignaturasResource {
         return asignaturaRepository.findAll();
     }
 
-    @GetMapping("/asignaturas/{IdGrado}")
-    public List<Asignaturas> findByIdGrado(@PathVariable("IdGrado") final int IdGrado){
-    List<Asignaturas> asignaturas = asignaturaRepository.findAllByIdGrado(IdGrado);
+    @PostMapping("/Grado/")
+    public List<Asignaturas> findByIdGrado(@RequestBody Map<String,Integer> cosa){
+        Iterator iterator = cosa.keySet().iterator();
+        List<Asignaturas> asignaturas= new ArrayList<>();
+        if(iterator.hasNext()){
+            String i=iterator.next().toString();
+            asignaturas = asignaturaRepository.findAllByIdGrado(cosa.get(i));
+        }
     return  asignaturas;
     }
     @PostMapping("/aprovadas")
@@ -52,30 +57,43 @@ public class AsignaturasResource {
         return asignaturaRepository.findAllByIdGrado(4);
     }
 
-    public List<Asignaturas> getNoAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
+    public List<Asignaturas> getNoAprobadas(@RequestBody Map<String,Integer> json) {
         List<Asignaturas> listaNoAporabadas=new ArrayList<Asignaturas>();
-        for(int i=0;i<lista.size();i++) {
-            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==0) {
-                listaNoAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+        Iterator iterator = json.keySet().iterator();
+        while(iterator.hasNext()) {
+            String i = iterator.next().toString();
+            if(asignaturaRepository.findByid(json.get(i)).getValidacion()==0) {
+                listaNoAporabadas.add(asignaturaRepository.findByid(json.get(i)));
             }
         }
         return listaNoAporabadas;
     }
-
-    public Asignaturas getAsignatura(Integer id){
-        return asignaturaRepository.findByid(id);
+    @PostMapping("/Byid")
+    public Asignaturas getAsignatura(@RequestBody Map<String,Integer> json){
+        Iterator iterator = json.keySet().iterator();
+        Asignaturas asignatura = new Asignaturas();
+        if(iterator.hasNext())
+        {
+            String i = iterator.next().toString();
+            asignatura=asignaturaRepository.findByid(json.get(i));
+        }
+        return asignatura;
     }
 
     public Integer getCreditos(Integer id){
         return asignaturaRepository.findByid(id).getCreditoss();
     }
 
-    public List<String> getContenido(Integer id){
-        return contenidoResource.getContenido(id);
+    @PostMapping("/ContenidoByid")
+    public List<String> getContenido(@RequestBody Map<String,Integer> json){
+           List<String> contenido= contenidoResource.getContenido(json);
+        return contenido;
+        
     }
 
-    public String getOutcom(Integer idOutcom){
-        return outcomResource.getContenidoOutcom(idOutcom);
+    @PostMapping("/OutcomByid")
+    public String getOutcom(@RequestBody Map<String,Integer> json){
+        return outcomResource.getOutcom(json).getDescripcionOutcom();
     }
 
 }

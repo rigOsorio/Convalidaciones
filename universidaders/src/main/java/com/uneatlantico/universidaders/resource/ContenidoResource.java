@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/rest/contenido")
@@ -24,13 +26,16 @@ public class ContenidoResource {
         return contenidoR;
     }
 
-    @GetMapping("/asi/{idAsignaturas}")
-    public List<String> getContenido(@PathVariable("idAsignaturas") final Integer idAsignaturas)
+    @PostMapping("/idAsignatura")
+    public List<String> getContenido(@RequestBody Map<String,Integer> json)
     {
+        Iterator iterator = json.keySet().iterator();
         List<String> listaContenido=new ArrayList<String>();
-        for(int i=0;i<contenidoRepository.findByidAsignatura(idAsignaturas).size();i++) {
-            listaContenido.add(contenidoRepository.findByidAsignatura(idAsignaturas).get(i).getContenidos());
-        }
+        if(iterator.hasNext()){
+            String next = iterator.next().toString();
+        for(int i=0;i<contenidoRepository.findByidAsignatura(json.get(next)).size();i++) {
+            listaContenido.add(contenidoRepository.findByidAsignatura(json.get(next)).get(i).getContenidos());
+        }}
         return listaContenido;
     }
 
