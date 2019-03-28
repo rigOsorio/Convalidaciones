@@ -26,11 +26,11 @@ public class ValidadasController {
 
     @PostMapping(value = "validadas")
     public String valicacion(@RequestParam String idAsignatura, Model model){
-        List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
+        //List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
         List<Asignaturas> uneatlantico = asignaturasResource.getUneatlantico();
         List<String> contenidos = contenidoResource.getAll();
         List<Asignaturas> noAprov = asignaturasResource.getNoAprobadas(separarId(idAsignatura));
-        model.addAttribute("ids",asignaturas);
+       // model.addAttribute("ids",asignaturas);
         model.addAttribute("uneatlantico",uneatlantico);
         model.addAttribute("aasignaturaResource",asignaturasResource);
         model.addAttribute("asignaturasNoAprobadas",noAprov);

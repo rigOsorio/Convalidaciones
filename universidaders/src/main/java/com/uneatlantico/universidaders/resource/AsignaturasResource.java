@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/rest/asignaturas")
@@ -32,11 +34,15 @@ public class AsignaturasResource {
     return  asignaturas;
     }
     @PostMapping("/aprovadas")
-    public List<Asignaturas> getAprobadas(@RequestParam("List<Integer>") List<Integer> lista) {
-        List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
-        for(int i=0;i<lista.size();i++) {
-            if(asignaturaRepository.findByid(lista.get(i)).getValidacion()==1) {
-                listaAporabadas.add(asignaturaRepository.findByid(lista.get(i)));
+    public List<Asignaturas>  getAprobadas(@RequestBody Map<String,Integer> cosa) {
+
+         List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
+        Iterator jaja = cosa.keySet().iterator();
+        while(jaja.hasNext()) {
+            String i = jaja.next().toString();
+            System.out.println(asignaturaRepository.findByid(cosa.get(i)).getValidacion());
+            if(asignaturaRepository.findByid(cosa.get(i)).getValidacion()==1) {
+                listaAporabadas.add(asignaturaRepository.findByid(cosa.get(i)));
             }
         }
         return listaAporabadas;
