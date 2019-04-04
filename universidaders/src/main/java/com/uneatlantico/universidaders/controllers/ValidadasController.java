@@ -28,17 +28,19 @@ public class ValidadasController {
 
     @PostMapping(value = "validadas")
     public String valicacion(@RequestParam String idAsignatura, Model model){
-        //List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
+        List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
         List<Asignaturas> uneatlantico = asignaturasResource.getUneatlantico();
         List<String> contenidos = contenidoResource.getAll();
         List<Asignaturas> noAprov = asignaturasResource.getNoAprobadas(separarId(idAsignatura));
-       // model.addAttribute("ids",asignaturas);
+        Map<String,Integer> algo= new HashMap<>();
+        model.addAttribute("ids",asignaturas);
         model.addAttribute("uneatlantico",uneatlantico);
         model.addAttribute("aasignaturaResource",asignaturasResource);
         model.addAttribute("asignaturasNoAprobadas",noAprov);
         model.addAttribute("contenidos",contenidos);
         model.addAttribute("keys",separarId(idAsignatura));
-
+        model.addAttribute("map",algo);
+        //asignaturasResource.getContenido();
         model.addAttribute("title","Validacion");
 
         return"views/validadas";

@@ -60,6 +60,21 @@
         console.log(datas);
         console.log(dataReal);
         $("#idAsignatura").attr('value',dataReal);
+       /* var datas=$('#formulario').serializeArray().reduce(function (obj,item) {
+            obj[item.name]=item.value;
+            return obj;
+        },{});
+        $.ajax({
+            type: "POST",
+            url:"validadas",
+            contentType:'application/json',
+            dataType:'json',
+            async: true,
+            data: JSON.stringify(datas),
+            cache:false,
+            success: function () {
+                alert("funciono");
+            }});*/
     });
    </script>
 <script th:src="@{/js/jquery-3.3.1.js}"></script>

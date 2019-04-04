@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/rest/asignaturas")
@@ -88,6 +85,7 @@ public class AsignaturasResource {
     public List<String> getContenido(@RequestBody Map<String,Integer> json){
            List<String> contenido= contenidoResource.getContenido(json);
         return contenido;
+
         
     }
 
