@@ -6,30 +6,18 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" crossorigin="anonymous">
 
     <title th:text="${title}"></title>
-
 </head>
 <body>
-<header>
-    <nav th:insert="/views/fragments/general.html"></nav>
-</header>
-<div class="container">
-    <div class="row">
-        <div class="col align-self-center">
-            <form action="#" th:action="@{/views/grados}" method="post">
-                <div class="form-group">
-                    <select name="idUniversidad" id="nombre" class="form-control">
-                        <option th:each="universidade: ${universidades}" th:value="${universidade.id}" th:text="${universidade.nombreUniversidad}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
+<form action="#" th:action="@{/rest/universidades/nombreUniversidad}" method="post">
+    <div class="form-group">
+        <select name="nombreUniversidad" id="nombre" class="form-control">
+            <option th:each="universidade: ${universidades}" th:value="${universidade.nombreUniversidad}" th:text="${universidade.nombreUniversidad}"></option>
+        </select>
     </div>
-</div>
-
-<!--
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
 <table class="table">
     <thead>
     <tr>
@@ -42,8 +30,9 @@
         <th th:text="${universidad.id}"></th>
         <td th:text="${universidad.nombreUniversidad}"></td>
     </tr>
+
     </tbody>
-</table>!-->
+</table>
 <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>

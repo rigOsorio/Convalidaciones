@@ -18,7 +18,7 @@
                 <form action=""th:action="@{validadas}" id="formulario" method="post">
                     <div  class="form-group row">
                         <div th:each="asigantura:${asiganturas}" class="form-check align-self-center col-4">
-                            <input class="form-check-input" type="checkbox"   th:attr="value=${asigantura.getId()},name=${'idAsignatura'+asigantura.getId()}, id=${asigantura.getId()}">
+                            <input class="form-check-input d-none" type="checkbox"   th:attr="value=${asigantura.getId()},name=${'idAsignatura'+asigantura.getId()}, id=${asigantura.getId()}">
                             <label class="form-check-label"th:attr="id=${asigantura.getId()}" th:for="${asigantura.getId()}" th:text="${asigantura.getNombreAsignatura()}"></label>
                         </div>
                     </div>
@@ -33,6 +33,13 @@
 </div>
 
 <script th:inline="javascript">
+    $('.form-check-input').change(function () {
+        if($(this).is(":checked")){
+            $(this).parent("div").attr('class','form-check align-self-center col-4 rounded bg-success');
+        }else {
+            $(this).parent("div").attr('class','form-check align-self-center col-4');
+        }
+    });
     $("#boton").click(function () {
         var dataReal='';
         var datas=$('#formulario').serializeArray().reduce(function (obj,item) {
@@ -47,10 +54,27 @@
                 dataReal+=""
             else
                 dataReal+=","+value;
+
+
         });
         console.log(datas);
         console.log(dataReal);
         $("#idAsignatura").attr('value',dataReal);
+       /* var datas=$('#formulario').serializeArray().reduce(function (obj,item) {
+            obj[item.name]=item.value;
+            return obj;
+        },{});
+        $.ajax({
+            type: "POST",
+            url:"validadas",
+            contentType:'application/json',
+            dataType:'json',
+            async: true,
+            data: JSON.stringify(datas),
+            cache:false,
+            success: function () {
+                alert("funciono");
+            }});*/
     });
    </script>
 <script th:src="@{/js/jquery-3.3.1.js}"></script>
