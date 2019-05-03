@@ -9,6 +9,7 @@ import com.uneatlantico.universidaders.model.Universidades;
 import com.uneatlantico.universidaders.repository.GradosRepository;
 import com.uneatlantico.universidaders.repository.UniversidadesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,9 +22,17 @@ public class UniversidadesResource {
     @Autowired
     GradosRepository gradoRepository;
 
+     
     @GetMapping("/all")
     public List<Universidades> getAll(){
         List<Universidades> lista=universidadesRepository.findAll();
+        return lista;
+    }
+    
+    
+    @GetMapping("/all2")
+    public List<Universidades> getAll2(){
+        ArrayList<Universidades> lista=(ArrayList<Universidades>) universidadesRepository.findAll();
         lista.remove(universidadesRepository.findAll().get(3));
         return lista;
     }
