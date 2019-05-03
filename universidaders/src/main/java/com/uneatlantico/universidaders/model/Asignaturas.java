@@ -5,29 +5,29 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="tb_asignaturas",catalog="db_universidades3")
+@Entity//la anotación Entity le premite a spring reconocer el tipo de clase que es, en este caso reconoce que hacemos referencia a una tabla de la base de datos.
+@Table(name="tb_asignaturas",catalog="db_universidades3")//en name le pasamos el nombre de la tabla y en catalog el nombre de la base de datos
 public class Asignaturas {
-    @Id
-    @Column(name="id")
+    @Id//es para reconocer el id de la tabla
+    @Column(name="id")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer id;
 
-    @Column(name="nombre_asignatura")
+    @Column(name="nombre_asignatura")//le decimose el nombre del atributo al que hace referencia la variable
     private String nombreAsignatura;
 
-    @Column(name="id_Grado")
+    @Column(name="id_Grado")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer idGrado;
 
-    @Column(name="creditos")
+    @Column(name="creditos")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer creditoss;
 
-    @Column(name="por_creditos")
+    @Column(name="por_creditos")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer  apruebaPorCreditos;
 
-    @Column(name="por_outcom")
+    @Column(name="por_outcom")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer apruebaPorCompetencias;
 
-    @Column(name="por_contenido")
+    @Column(name="por_contenido")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer apruebaPorContenido;
 
     public Integer getIdAsigantura() {
@@ -38,13 +38,13 @@ public class Asignaturas {
         this.idAsigantura = idAsigantura;
     }
 
-    @Column(name="id_outcom")
+    @Column(name="id_outcom")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer idOutcom;
 
-    @Column(name="id_asignatura")
+    @Column(name="id_asignatura")//le decimose el nombre del atributo al que hace referencia la variable
     private  Integer idAsigantura;
 
-    @Column(name="aprueba")
+    @Column(name="aprueba")//le decimose el nombre del atributo al que hace referencia la variable
     private Integer validacion;
 
     public Integer getValidacion() {

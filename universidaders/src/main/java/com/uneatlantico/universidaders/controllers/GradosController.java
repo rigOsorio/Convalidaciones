@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import com.uneatlantico.universidaders.model.Grados;
 import com.uneatlantico.universidaders.resource.GradosResource;
 
-@Controller
-@RequestMapping("views")
+@Controller//Controller indica que esta clase estable la conexión con la vista
+@RequestMapping("views")//le damos la ruta para acceder a la clase
 public class GradosController {
-    @Autowired
+    @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     GradosResource gradosResource;
 
     @PostMapping(value = "grados")

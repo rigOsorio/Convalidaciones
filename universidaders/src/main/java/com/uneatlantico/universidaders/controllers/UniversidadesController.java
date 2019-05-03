@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 
-@Controller
-@RequestMapping("views")
+@Controller//Controller indica que esta clase estable la conexión con la vista
+@RequestMapping("views")//le damos la ruta para acceder a la clase
 
 public class UniversidadesController {
-    @Autowired
+    @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     private UniversidadesResource universidadesResource ;
 
     @RequestMapping(value = "")

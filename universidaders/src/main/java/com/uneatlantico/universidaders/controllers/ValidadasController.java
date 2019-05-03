@@ -17,35 +17,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
-@RequestMapping(value = "views")
+@Controller//Controller indica que esta clase estable la conexión con la vista
+@RequestMapping(value = "otro")//le damos la ruta para acceder a la clase
 public class ValidadasController {
-    @Autowired
+    @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturasResource asignaturasResource;
 
-    @Autowired
+    @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     ContenidoResource contenidoResource;
 
     @PostMapping(value = "validadas")
-    public String valicacion(@RequestParam String idAsignatura, Model model){
-        List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
+    public String valicacion(@RequestParam String data, Model model){
+
+        //List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(idAsignatura));
         List<Asignaturas> uneatlantico = asignaturasResource.getUneatlantico();
         List<String> contenidos = contenidoResource.getAll();
-        List<Asignaturas> noAprov = asignaturasResource.getNoAprobadas(separarId(idAsignatura));
-        Map<String,Integer> algo= new HashMap<>();
-        model.addAttribute("ids",asignaturas);
+        List<Asignaturas> noAprov = asignaturasResource.getNoAprobadas(separarId(data));
+       // model.addAttribute("ids",asignaturas);
         model.addAttribute("uneatlantico",uneatlantico);
         model.addAttribute("aasignaturaResource",asignaturasResource);
         model.addAttribute("asignaturasNoAprobadas",noAprov);
         model.addAttribute("contenidos",contenidos);
-        model.addAttribute("keys",separarId(idAsignatura));
-        model.addAttribute("map",algo);
-        //asignaturasResource.getContenido();
+        model.addAttribute("keys",separarId(data));
+
         model.addAttribute("title","Validacion");
 
         return"views/validadas";
     }
-    @GetMapping(value = "validadas")
+    @GetMapping(value = "validas")
     public String undefined(Model model){
 
         return "views/validadas";

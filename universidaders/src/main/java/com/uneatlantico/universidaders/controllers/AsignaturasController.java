@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
-@RequestMapping(value = "views")
+@Controller//Controller indica que esta clase estable la conexión con la vista
+@RequestMapping(value = "views")//le damos la ruta para acceder a la clase
 public class AsignaturasController {
-    @Autowired
+    @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturasResource asignaturasResource;
 
     @PostMapping(value = "asignaturas")
