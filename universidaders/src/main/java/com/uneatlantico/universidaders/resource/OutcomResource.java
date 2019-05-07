@@ -14,13 +14,13 @@ import java.util.Map;
 public class OutcomResource {
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     OutcomRepository outcomRepository;
-
+/*
     @GetMapping("/all")//GetMapping indica que sera es un metodo get, y también crea la ruta para acceder al método
     public List<Outcom> getAll(){
         return outcomRepository.findAll();
     }
-
-    @PostMapping("/Byid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+*/
+    //@PostMapping("/Byid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
     public Outcom getOutcom(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
         Iterator iterator = json.keySet().iterator();
         Outcom outcom = new Outcom();

@@ -16,17 +16,20 @@ import java.util.Map;
 @Controller//Controller indica que esta clase estable la conexión con la vista
 @RequestMapping(value = "views")//le damos la ruta para acceder a la clase
 public class AsignaturasController {
+
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturasResource asignaturasResource;
 
     @PostMapping(value = "asignaturas")
     public String index(@RequestParam("IdGrado") int IdGrado, Model model){
-        Map <String,Integer> algo = new HashMap<String,Integer>();
-        algo.put("hola",IdGrado);
-        List<Asignaturas> asignaturas = asignaturasResource.findByIdGrado(algo);
-        model.addAttribute("asiganturas",asignaturas);
-        model.addAttribute("title","Asignaturas");
-        return "views/asignaturas";
+        try {
+            List<Asignaturas> asignaturas = asignaturasResource.findByIdGrado(IdGrado);
+            model.addAttribute("asiganturas", asignaturas);
+            model.addAttribute("title", "Asignaturas");
+            return "views/asignaturas";
+        }catch (Exception e){
+            return "views/undefined";
+        }
     }
 
     @GetMapping(value = "asignaturas")

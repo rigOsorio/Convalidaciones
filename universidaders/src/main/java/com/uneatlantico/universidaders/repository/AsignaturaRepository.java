@@ -10,7 +10,8 @@ import java.util.List;
 public interface AsignaturaRepository extends JpaRepository<Asignaturas,Integer> {
     //creamos un metodo que retornara una lista de Asignaturas que buscara por el id del grado que le pasemos
     //idGrado es un atributo de Asignaturas
-    public List<Asignaturas> findAllByIdGrado(@PathVariable("IdGrado") final int IdGrado);
+     List<Asignaturas> findAllByIdGrado(@PathVariable("IdGrado") final int IdGrado);
+
     //creamos un metodo que retornara una objetod Asignatura segun el id que le pasemos
-    public Asignaturas findByid(Integer id);
+     Asignaturas findByid(Integer id);
 }

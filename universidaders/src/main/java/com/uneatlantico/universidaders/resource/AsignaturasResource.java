@@ -14,6 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/rest/asignaturas")//RequestMapping nos permite crear una ruta para acceder a nuestra clase
 public class AsignaturasResource {
+
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturaRepository asignaturaRepository;
 
@@ -22,31 +23,27 @@ public class AsignaturasResource {
 
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     OutcomResource  outcomResource;
-
+/*
     @GetMapping("/all")//GetMapping indica que sera es un metodo get, y también crea la ruta para acceder al método
     public List<Asignaturas> getAll(){
         return asignaturaRepository.findAll();
     }
+*/
 
-    @PostMapping("/Grado/")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
-    public List<Asignaturas> findByIdGrado(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
-        Iterator iterator = json.keySet().iterator();
-        List<Asignaturas> asignaturas= new ArrayList<>();
-        if(iterator.hasNext()){
-            String i=iterator.next().toString();
-            asignaturas = asignaturaRepository.findAllByIdGrado(json.get(i));
-        }
-    return  asignaturas;
+    //@GetMapping("/Grado/")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+    public List<Asignaturas> findByIdGrado(Integer id){
+    return  asignaturaRepository.findAllByIdGrado(id);
     }
-    @PostMapping("/aprovadas")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
-    public List<Asignaturas>  getAprobadas(@RequestBody Map<String,Integer> cosa) {//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
+
+    //@PostMapping("/aprovadas")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+    public List<Asignaturas>  getAprobadas(Map<String,Integer> map ) {//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
         List<Asignaturas> listaAporabadas=new ArrayList<Asignaturas>();
-        Iterator jaja = cosa.keySet().iterator();
-        while(jaja.hasNext()) {
-            String i = jaja.next().toString();
-            System.out.println(asignaturaRepository.findByid(cosa.get(i)).getValidacion());
-            if(asignaturaRepository.findByid(cosa.get(i)).getValidacion()==1) {
-                listaAporabadas.add(asignaturaRepository.findByid(cosa.get(i)));
+        Iterator iterator = map.keySet().iterator();
+        while(iterator.hasNext()) {
+            String i = iterator.next().toString();
+            System.out.println(asignaturaRepository.findByid(map.get(i)).getValidacion());
+            if(asignaturaRepository.findByid(map.get(i)).getValidacion()==1) {
+                listaAporabadas.add(asignaturaRepository.findByid(map.get(i)));
             }
         }
         return listaAporabadas;
@@ -57,18 +54,19 @@ public class AsignaturasResource {
         return asignaturaRepository.findAllByIdGrado(4);
     }
 
-    public List<Asignaturas> getNoAprobadas(@RequestBody Map<String,Integer> json) {
+    public List<Asignaturas> getNoAprobadas(@RequestBody Map<String,Integer> map) {
         List<Asignaturas> listaNoAporabadas=new ArrayList<Asignaturas>();
-        Iterator iterator = json.keySet().iterator();
+        Iterator iterator = map.keySet().iterator();
         while(iterator.hasNext()) {
             String i = iterator.next().toString();
-            if(asignaturaRepository.findByid(json.get(i)).getValidacion()==0) {
-                listaNoAporabadas.add(asignaturaRepository.findByid(json.get(i)));
+            if(asignaturaRepository.findByid(map.get(i)).getValidacion()==0) {
+                listaNoAporabadas.add(asignaturaRepository.findByid(map.get(i)));
             }
         }
         return listaNoAporabadas;
     }
-    @PostMapping("/Byid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+
+    //@PostMapping("/Byid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
     public Asignaturas getAsignatura(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
         Iterator iterator = json.keySet().iterator();
         Asignaturas asignatura = new Asignaturas();
@@ -84,16 +82,15 @@ public class AsignaturasResource {
         return asignaturaRepository.findByid(id).getCreditoss();
     }
 
-    @PostMapping("/ContenidoByid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
-    public List<String> getContenido(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
-           List<String> contenido= contenidoResource.getContenido(json);
+    //@PostMapping("/ContenidoByid/")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+    public List<String> getContenido(@RequestBody Map<String,Integer> map){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
+           List<String> contenido= contenidoResource.getContenido(map);
         return contenido;
-        
     }
 
-    @PostMapping("/OutcomByid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
-    public String getOutcom(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
-        return outcomResource.getOutcom(json).getDescripcionOutcom();
+    //@PostMapping("/OutcomByid")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
+    public String getOutcom(@RequestBody Map<String,Integer> map){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
+        return outcomResource.getOutcom(map).getDescripcionOutcom();
     }
 
 }

@@ -18,19 +18,10 @@ public class GradosResource {
 	@Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
 	GradosRepository gradosRepository;
 
-	@PostMapping("/ByidUniversidad")//PostMapping indica que sera un método post, por lo tanto el método recibira datos, también creamos la ruta para acceder al método
-	public List<Grados> getGrados(@RequestBody Map<String,Integer> json){//RequestBody permite recibir más de un solo parámetro, en este caso le dicimos que lo que reciba lo guarde en un map, pues el parámetro que reciba será un json
-		Iterator iterator = json.keySet().iterator();
-		List<Grados> grados = new ArrayList<>();
-		if(iterator.hasNext()) {
-			String i = iterator.next().toString();
-			grados= gradosRepository.findByidUniversidad(json.get(i));
-		}
+	public List<Grados> getGrados(Integer id){
+		List<Grados> grados;
+		grados= gradosRepository.findByidUniversidad(id);
 		return grados;
 	}
 
-	@GetMapping("/all")//GetMapping indica que sera es un metodo get, y también crea la ruta para acceder al método
-	public List<Grados> getAll(){
-		return gradosRepository.findAll();
-	}
 }
