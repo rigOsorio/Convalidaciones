@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller//Controller indica que esta clase estable la conexión con la vista
-@RequestMapping("views")//le damos la ruta para acceder a la clase
+@RequestMapping("/views")//le damos la ruta para acceder a la clase
 
 public class UniversidadesController {
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada

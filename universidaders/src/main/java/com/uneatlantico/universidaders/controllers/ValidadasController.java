@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller//Controller indica que esta clase estable la conexión con la vista
-@RequestMapping(value = "views")//le damos la ruta para acceder a la clase
+@RequestMapping(value = "/views")//le damos la ruta para acceder a la clase
 public class ValidadasController {
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturasResource asignaturasResource;
@@ -26,8 +26,8 @@ public class ValidadasController {
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     ContenidoResource contenidoResource;
 
-    @PostMapping(value = "validadas")
-    public String valicacion(@RequestBody String data, Model model){
+    @PostMapping(value = "/validadas")
+    public String valicacion(@RequestParam("data") String data, Model model){
         try {
             List<Asignaturas> asignaturas = asignaturasResource.getAprobadas(separarId(data));
             List<Asignaturas> uneatlantico = asignaturasResource.getUneatlantico();
@@ -47,15 +47,17 @@ public class ValidadasController {
             return "views/undefined";
         }
     }
-    @GetMapping(value = "validas")
+    @GetMapping(value = "/validas")
     public String undefined(Model model){
 
         return "views/validadas";
     }
+    
+    
     public Map<String,Integer> separarId(String lista){
         String[] list;
         Map<String,Integer> listaId=new HashMap<>();
-        list=(lista.split("%2C"));
+        list=(lista.split(","));
         for(int i=0;i<list.length;i++){
             listaId.put("jaja"+i,Integer.parseInt(list[i]));
         }

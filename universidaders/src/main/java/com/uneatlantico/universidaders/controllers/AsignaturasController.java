@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller//Controller indica que esta clase estable la conexión con la vista
-@RequestMapping(value = "views")//le damos la ruta para acceder a la clase
+@RequestMapping(value = "/views")//le damos la ruta para acceder a la clase
 public class AsignaturasController {
 
     @Autowired//autowired le indica a spring que la variable hará uso de los metodos que ofrece la clase o interfaz, esto sin ser inicializada
     AsignaturasResource asignaturasResource;
 
-    @PostMapping(value = "asignaturas")
+    @PostMapping(value = "/asignaturas")
     public String index(@RequestParam("IdGrado") int IdGrado, Model model){
         try {
             List<Asignaturas> asignaturas = asignaturasResource.findByIdGrado(IdGrado);
@@ -32,7 +32,7 @@ public class AsignaturasController {
         }
     }
 
-    @GetMapping(value = "asignaturas")
+    @GetMapping(value = "/asignaturas")
     public String undefined(Model model){
         model.addAttribute("title","Undefined");
 
